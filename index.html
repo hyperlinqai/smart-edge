@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartEdge - Power Your Sales with SmartEdge</title>
+  
+  <!-- Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Phosphor Icons CDN: Modern Duotone, Bold, Regular, and Fill Icon System -->
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css"/>
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css"/>
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/duotone/style.css"/>
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css"/>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              200: '#bbf7d0',
+              300: '#86efac',
+              400: '#4ade80',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#00875a',
+              800: '#065f46',
+              900: '#064e3b',
+              950: '#063a28',
+              primary: '#00875a',
+              dark: '#0e2b20',
+              footer: '#073b2a'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+          },
+          boxShadow: {
+            'card-soft': '0 10px 30px -5px rgba(0, 50, 30, 0.05), 0 1px 3px rgba(0, 0, 0, 0.03)',
+            'login-float': '0 25px 60px -12px rgba(5, 50, 32, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.95)',
+            'feature-card': '0 8px 20px -3px rgba(0, 60, 40, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03)',
+            'btn-submit': '0 12px 25px -4px rgba(0, 135, 90, 0.38)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f7fdfa;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Ambient background gradient swooshes matching exact reference */
+    .hero-canvas {
+      background: 
+        radial-gradient(circle at 62% 40%, rgba(167, 243, 208, 0.45) 0%, rgba(209, 250, 229, 0.25) 30%, transparent 65%),
+        radial-gradient(circle at 90% 15%, rgba(110, 231, 183, 0.28) 0%, transparent 50%),
+        radial-gradient(circle at 12% 48%, rgba(220, 252, 231, 0.45) 0%, transparent 45%),
+        linear-gradient(135deg, #ffffff 0%, #f4fbf7 45%, #e6f6ee 100%);
+    }
+
+    /* Decorative bottom waves */
+    .wave-bg-shape {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Input card interactive state */
+    .login-field {
+      background-color: #f6f9fb;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 18px;
+      transition: all 0.2s ease-in-out;
+    }
+    
+    .login-field:focus-within {
+      background-color: #ffffff;
+      border-color: #00875a;
+      box-shadow: 0 0 0 3.5px rgba(0, 135, 90, 0.15);
+    }
+
+    /* 3D Laptop subtle hover micro-interaction */
+    .hero-laptop-img {
+      filter: drop-shadow(0 20px 35px rgba(5, 50, 30, 0.18));
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hero-laptop-container:hover .hero-laptop-img {
+      transform: translateY(-6px) scale(1.015);
+    }
+  </style>
+</head>
+
+<body class="hero-canvas min-h-screen flex flex-col justify-between relative selection:bg-brand-200 selection:text-brand-900">
+
+  <!-- ==================== BACKGROUND DECORATIVE GRADIENT VECTORS ==================== -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <!-- Top-Right Smooth Curve -->
+    <svg class="wave-bg-shape top-0 right-0 w-[55vw] max-w-[850px] h-[75vh]" viewBox="0 0 700 650" fill="none">
+      <path d="M700 0 C 420 60, 360 380, 700 580 Z" fill="url(#gradWaveR1)" opacity="0.45"/>
+      <path d="M700 30 C 480 140, 420 440, 700 650 Z" fill="url(#gradWaveR2)" opacity="0.3"/>
+      <defs>
+        <linearGradient id="gradWaveR1" x1="100%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#34d399" stop-opacity="0.4"/>
+          <stop offset="60%" stop-color="#a7f3d0" stop-opacity="0.15"/>
+          <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="gradWaveR2" x1="100%" y1="20%" x2="20%" y2="90%">
+          <stop offset="0%" stop-color="#10b981" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#6ee7b7" stop-opacity="0.05"/>
+        </linearGradient>
+      </defs>
+    </svg>
+
+    <!-- Bottom-Left Decorative Wave -->
+    <svg class="wave-bg-shape bottom-0 left-0 w-[42vw] max-w-[550px] h-[250px]" viewBox="0 0 500 220" fill="none">
+      <path d="M0 220 C 160 180, 260 110, 360 220 Z" fill="#10b981" fill-opacity="0.25"/>
+      <path d="M0 220 C 110 140, 220 80, 420 220 Z" fill="#34d399" fill-opacity="0.18"/>
+    </svg>
+
+    <!-- Bottom-Right Decorative Wave -->
+    <svg class="wave-bg-shape bottom-0 right-0 w-[42vw] max-w-[550px] h-[250px]" viewBox="0 0 500 220" fill="none">
+      <path d="M500 220 C 340 170, 240 100, 140 220 Z" fill="#10b981" fill-opacity="0.28"/>
+      <path d="M500 220 C 390 130, 270 70, 70 220 Z" fill="#34d399" fill-opacity="0.18"/>
+    </svg>
+  </div>
+
+  <!-- ==================== TOP NAVIGATION BAR ==================== -->
+  <header class="relative z-30 w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-12 pt-6 pb-2">
+    <div class="flex items-center justify-between">
+      
+      <!-- BRAND LOGO (SMARTEDGE - BACKGROUND REMOVED TRANSPARENT PNG) -->
+      <a href="#" class="flex items-center group focus:outline-none focus:ring-2 focus:ring-brand-500 rounded-xl p-0.5" title="SmartEdge">
+        <img 
+          src="assets/images/smartedge-logo.png" 
+          alt="SmartEdge - FAST • SECURE • SMART PAYMENTS" 
+          class="h-[65px] sm:h-[74px] md:h-[82px] w-auto object-contain transition-transform duration-200 group-hover:scale-102"
+        />
+      </a>
+
+      <!-- DESKTOP NAV -->
+      <nav class="hidden md:flex items-center space-x-1 lg:space-x-3 text-[15px] font-semibold">
+        <a href="#home" class="px-5 py-2 rounded-full bg-[#dcfce7] text-[#065f46] hover:bg-[#bbf7d0] transition-colors shadow-xs">
+          Home
+        </a>
+        <a href="#about" class="px-5 py-2 rounded-full text-slate-700 hover:text-[#00875a] hover:bg-white/60 transition-colors">
+          About Us
+        </a>
+        <a href="#contact" class="px-5 py-2 rounded-full text-slate-700 hover:text-[#00875a] hover:bg-white/60 transition-colors">
+          Contact Us
+        </a>
+      </nav>
+
+      <!-- MOBILE MENU BUTTON -->
+      <div class="flex md:hidden items-center">
+        <button id="mobile-menu-btn" class="p-2.5 rounded-xl text-slate-700 bg-white/80 hover:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 shadow-sm" aria-label="Toggle Menu">
+          <i class="ph-bold ph-list text-2xl"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- MOBILE MENU DROPDOWN -->
+    <div id="mobile-menu" class="hidden md:hidden mt-3 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-brand-100 p-4 space-y-2">
+      <a href="#home" class="block px-4 py-3 rounded-xl bg-[#dcfce7] text-[#065f46] font-semibold">Home</a>
+      <a href="#about" class="block px-4 py-3 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-brand-700 font-medium">About Us</a>
+      <a href="#contact" class="block px-4 py-3 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-brand-700 font-medium">Contact Us</a>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN CONTENT SECTION ==================== -->
+  <main class="relative z-10 w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-12 py-6 sm:py-8 lg:py-10 flex-grow flex items-center">
+    
+    <!-- RESPONSIVE 3-PART COMPOSITION:
+         - On Mobile (< lg): Login section is ORDER 1 (appears at the top!), followed by Hero Text (Order 2), then 3D Laptop (Order 3).
+         - On Desktop (>= lg): Hero Text (Order 1, left), Laptop (Order 2, center), Login (Order 3, right).
+    -->
+    <div class="w-full flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-6 xl:gap-10">
+
+      <!-- ================= 1. HERO TEXT & 4 FEATURE CARDS (Order 2 on Mobile, Order 1 on Desktop) ================= -->
+      <div class="w-full lg:w-[37%] xl:w-[36%] flex flex-col justify-center text-left order-2 lg:order-1">
+        
+        <!-- TAGLINE PILL BADGE -->
+        <div class="inline-flex items-center gap-2 self-start px-3.5 py-1.5 rounded-full bg-[#dcfce7] border border-[#bbf7d0] mb-5 shadow-xs">
+          <div class="text-[#00875a]">
+            <!-- Green mini bar chart icon with upward line -->
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 3v18h18"></path>
+              <path d="m19 9-5 5-4-4-3 3"></path>
+            </svg>
+          </div>
+          <span class="text-xs sm:text-[13px] font-bold text-slate-800 tracking-tight">
+            Lead. Nurture. Convert. Grow.
+          </span>
+        </div>
+
+        <!-- MAIN HEADLINE -->
+        <h1 class="text-4xl sm:text-5xl lg:text-[45px] xl:text-[50px] font-extrabold text-[#111827] leading-[1.12] tracking-tight mb-4">
+          Power Your Sales<br>
+          <span class="text-slate-900">with </span><span class="text-[#00875a]">SmartEdge</span>
+        </h1>
+
+        <!-- SUBTITLE -->
+        <p class="text-slate-600 text-base sm:text-[16.5px] max-w-[440px] font-normal leading-relaxed mb-8">
+          A smarter way to manage leads, automate follow-ups, and grow your business.
+        </p>
+
+        <!-- 4 FEATURE CARDS (Horizontal row on desktop, 2x2 grid on mobile) -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-3.5 max-w-[480px]">
+          
+          <!-- Card 1: Capture Leads -->
+          <div class="bg-white rounded-2xl p-3.5 sm:p-4 shadow-feature-card border border-slate-100 flex flex-col items-center justify-center text-center hover:-translate-y-1 hover:shadow-md transition-all duration-200 min-h-[96px]">
+            <div class="text-[#00875a] mb-2">
+              <i class="ph-duotone ph-users text-2xl"></i>
+            </div>
+            <div class="text-[11.5px] sm:text-[12px] font-bold text-slate-800 leading-tight">
+              Capture<br>Leads
+            </div>
+          </div>
+
+          <!-- Card 2: Automate Follow-ups -->
+          <div class="bg-white rounded-2xl p-3.5 sm:p-4 shadow-feature-card border border-slate-100 flex flex-col items-center justify-center text-center hover:-translate-y-1 hover:shadow-md transition-all duration-200 min-h-[96px]">
+            <div class="text-[#00875a] mb-2">
+              <i class="ph-duotone ph-lightning text-2xl"></i>
+            </div>
+            <div class="text-[11.5px] sm:text-[12px] font-bold text-slate-800 leading-tight">
+              Automate<br>Follow-ups
+            </div>
+          </div>
+
+          <!-- Card 3: Track Sales -->
+          <div class="bg-white rounded-2xl p-3.5 sm:p-4 shadow-feature-card border border-slate-100 flex flex-col items-center justify-center text-center hover:-translate-y-1 hover:shadow-md transition-all duration-200 min-h-[96px]">
+            <div class="text-[#00875a] mb-2">
+              <i class="ph-duotone ph-chart-line-up text-2xl"></i>
+            </div>
+            <div class="text-[11.5px] sm:text-[12px] font-bold text-slate-800 leading-tight">
+              Track<br>Sales
+            </div>
+          </div>
+
+          <!-- Card 4: Grow Revenue -->
+          <div class="bg-white rounded-2xl p-3.5 sm:p-4 shadow-feature-card border border-slate-100 flex flex-col items-center justify-center text-center hover:-translate-y-1 hover:shadow-md transition-all duration-200 min-h-[96px]">
+            <div class="text-[#00875a] mb-2">
+              <i class="ph-duotone ph-target text-2xl"></i>
+            </div>
+            <div class="text-[11.5px] sm:text-[12px] font-bold text-slate-800 leading-tight">
+              Grow<br>Revenue
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ================= 2. PHOTOREALISTIC 3D LAPTOP (Order 3 on Mobile, Order 2 on Desktop) ================= -->
+      <div class="w-full lg:w-[29%] xl:w-[31%] flex items-center justify-center hero-laptop-container relative py-2 order-3 lg:order-2">
+        
+        <!-- Ambient radial glow behind laptop -->
+        <div class="absolute -inset-6 bg-gradient-to-tr from-brand-300/35 via-emerald-200/20 to-transparent rounded-full filter blur-2xl pointer-events-none"></div>
+
+        <!-- 3D LAPTOP HIGH RESOLUTION ARTWORK -->
+        <div class="relative z-10 w-full max-w-[420px] sm:max-w-[460px] lg:max-w-[400px] xl:max-w-[440px] flex items-center justify-center">
+          <img 
+            src="assets/images/hero-laptop-3d@2x.png" 
+            alt="SmartEdge 3D Dashboard Laptop with Growth Charts"
+            class="hero-laptop-img w-full h-auto object-contain select-none pointer-events-none"
+            loading="eager"
+          />
+        </div>
+
+      </div>
+
+      <!-- ================= 3. ENLARGED MEMBER LOGIN SECTION (Order 1 on Mobile, Order 3 on Desktop) ================= -->
+      <div class="w-full lg:w-[34%] xl:w-[33%] flex justify-center lg:justify-end order-1 lg:order-3 flex-shrink-0">
+        
+        <!-- ENLARGED, SPACIOUS LOGIN CARD (width ~430px - 460px) -->
+        <div class="w-full max-w-[440px] sm:max-w-[470px] lg:max-w-[430px] xl:max-w-[460px] bg-white rounded-[30px] sm:rounded-[34px] p-7 sm:p-9 shadow-login-float border border-emerald-50/90 relative z-20">
+          
+          <!-- Card Header with User Icon -->
+          <div class="flex items-center gap-4 mb-6 sm:mb-7">
+            <!-- Light Green User Icon Box -->
+            <div class="w-12 h-12 sm:w-13 sm:h-13 rounded-2xl bg-[#e8f7f0] flex items-center justify-center text-[#00875a] flex-shrink-0 shadow-xs">
+              <i class="ph-duotone ph-user text-2xl"></i>
+            </div>
+            <div>
+              <h2 class="text-2xl sm:text-[25px] font-extrabold text-slate-900 tracking-tight leading-snug">
+                Member Login
+              </h2>
+              <p class="text-xs sm:text-[13.5px] text-slate-500 font-normal mt-0.5">
+                Welcome back! Please login to your account.
+              </p>
+            </div>
+          </div>
+
+          <!-- LOGIN FORM: ENLARGED INPUTS & PROPER ALIGNMENT -->
+          <form id="login-form" action="dashboard.html" method="GET" class="space-y-4 sm:space-y-4.5" onsubmit="handleLogin(event);">
+            
+            <!-- 1. MOBILE NUMBER INPUT FIELD (Enlarged with subtle green border) -->
+            <div class="login-field px-4 sm:px-5 py-3 sm:py-3.5 flex items-center">
+              <!-- Left Phone / Bookmark Icon -->
+              <div class="text-slate-400 mr-3.5 sm:mr-4 flex-shrink-0 flex items-center justify-center">
+                <i class="ph-duotone ph-device-mobile text-2xl"></i>
+              </div>
+              
+              <!-- Stacked Label and Input -->
+              <div class="flex-1 min-w-0">
+                <label for="mobile" class="block text-[11px] sm:text-[11.5px] font-semibold text-slate-500 leading-none mb-1">
+                  Mobile Number
+                </label>
+                <input 
+                  type="tel" 
+                  id="mobile" 
+                  name="mobile" 
+                  value="9612973828"
+                  placeholder="Enter mobile number" 
+                  class="w-full bg-transparent text-[16px] sm:text-[17px] font-bold text-slate-900 placeholder-slate-400 focus:outline-none p-0 leading-normal"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- 2. PASSWORD INPUT FIELD -->
+            <div class="login-field px-4 sm:px-5 py-3 sm:py-3.5 flex items-center">
+              <!-- Left Lock Icon -->
+              <div class="text-slate-400 mr-3.5 sm:mr-4 flex-shrink-0 flex items-center justify-center">
+                <i class="ph-duotone ph-lock-key text-2xl"></i>
+              </div>
+              
+              <!-- Stacked Label and Input -->
+              <div class="flex-1 min-w-0">
+                <label for="password" class="block text-[11px] sm:text-[11.5px] font-semibold text-slate-500 leading-none mb-1">
+                  Password
+                </label>
+                <input 
+                  type="password" 
+                  id="password" 
+                  name="password" 
+                  value="123456789012" 
+                  placeholder="Enter password" 
+                  class="w-full bg-transparent text-[16px] sm:text-[17px] font-bold text-slate-900 placeholder-slate-400 focus:outline-none p-0 tracking-widest leading-normal"
+                  required
+                />
+              </div>
+
+              <!-- Eye Show/Hide Toggle Button on the Right -->
+              <button 
+                type="button" 
+                id="toggle-password" 
+                class="text-slate-400 hover:text-slate-700 focus:outline-none p-2 ml-1 rounded-lg hover:bg-slate-200/50 transition-colors flex-shrink-0"
+                aria-label="Toggle password visibility"
+              >
+                <i class="ph-duotone ph-eye text-xl" id="eye-icon"></i>
+              </button>
+            </div>
+
+            <!-- 3. SUBMIT BUTTON -->
+            <div class="pt-2">
+              <button 
+                type="submit" 
+                class="w-full h-13 sm:h-[54px] px-6 rounded-2xl bg-gradient-to-r from-[#065b3d] via-[#00875a] to-[#10a368] hover:from-[#054b32] hover:to-[#026245] text-white text-[16px] sm:text-[17px] font-bold flex items-center justify-center gap-2.5 shadow-btn-submit hover:shadow-lg active:scale-[0.99] transition-all duration-200"
+              >
+                <span>Submit</span>
+                <i class="ph-bold ph-arrow-right text-lg"></i>
+              </button>
+            </div>
+
+            <!-- 4. FORGOT PASSWORD LINK -->
+            <div class="text-center pt-2">
+              <a href="#forgot" class="text-[14px] sm:text-[14.5px] font-bold text-[#00875a] hover:text-[#065f46] hover:underline underline-offset-4 transition-colors">
+                Forgot Password?
+              </a>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="relative z-20 w-full bg-[#073b2a] text-white/80 py-4 sm:py-5 px-4 sm:px-6 lg:px-12 mt-8 sm:mt-12 border-t border-emerald-900/40">
+    <div class="max-w-[1480px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
+      
+      <!-- Left: Legal Links -->
+      <div class="flex flex-wrap items-center justify-center md:justify-start gap-x-2 sm:gap-x-3 gap-y-1 font-medium text-emerald-100/75">
+        <a href="#privacy" class="hover:text-white transition-colors">Privacy Policy</a>
+        <span class="text-emerald-500/60">|</span>
+        <a href="#terms" class="hover:text-white transition-colors">Terms &amp; Conditions</a>
+        <span class="text-emerald-500/60">|</span>
+        <a href="#cancellation" class="hover:text-white transition-colors">Cancellation &amp; Refund Policy</a>
+      </div>
+
+      <!-- Center: Copyright Notice -->
+      <div class="text-center text-emerald-200/60 leading-relaxed font-normal">
+        Copyright &copy; 2024 Smart Edge &amp; Utility Solutions Private Limited.<br class="hidden sm:inline"> All Rights Reserved.
+      </div>
+
+      <!-- Right: Social Media Icons -->
+      <div class="flex items-center gap-2.5">
+        <!-- Facebook -->
+        <a href="#facebook" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all duration-200 hover:scale-105" aria-label="Facebook">
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+        </a>
+
+        <!-- Twitter / X -->
+        <a href="#twitter" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all duration-200 hover:scale-105" aria-label="Twitter">
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+
+        <!-- LinkedIn -->
+        <a href="#linkedin" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all duration-200 hover:scale-105" aria-label="LinkedIn">
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ==================== SCRIPT FOR INTERACTIONS ==================== -->
+  <script>
+    // Render Lucide Icons
+    lucide.createIcons();
+
+    // Toggle Password Visibility
+    const togglePasswordBtn = document.getElementById('toggle-password');
+    const passwordInput = document.getElementById('password');
+
+    togglePasswordBtn.addEventListener('click', () => {
+      const isPassword = passwordInput.type === 'password';
+      passwordInput.type = isPassword ? 'text' : 'password';
+      
+      togglePasswordBtn.innerHTML = isPassword 
+        ? '<i class="ph-duotone ph-eye-slash text-xl text-slate-400"></i>'
+        : '<i class="ph-duotone ph-eye text-xl text-slate-400"></i>';
+    });
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Handle Login Submit - Direct redirect to dashboard
+    function handleLogin(e) {
+      if (e) e.preventDefault();
+      window.location.href = 'dashboard.html';
+    }
+  </script>
+</body>
+</html>

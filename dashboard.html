@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartEdge - Business Dashboard</title>
+  
+  <!-- Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Phosphor Icons CDN: Modern Duotone, Bold, Regular, and Fill Icon System -->
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css"/>
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css"/>
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/duotone/style.css"/>
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css"/>
+
+  <!-- Remix Icon CDN: Premium Fintech & UI Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"/>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              200: '#bbf7d0',
+              300: '#86efac',
+              400: '#4ade80',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#00875a',
+              800: '#065f46',
+              900: '#064e3b',
+              950: '#063a28',
+              primary: '#00875a',
+              accent: '#00a86b',
+              dark: '#0e2b20'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+          },
+          boxShadow: {
+            'card-soft': '0 4px 20px -2px rgba(0, 40, 20, 0.04), 0 2px 6px -1px rgba(0, 0, 0, 0.02)',
+            'nav-active': '0 8px 18px -4px rgba(0, 135, 90, 0.35)',
+            'pill-soft': '0 2px 8px rgba(0, 0, 0, 0.04)',
+            'quick-btn': '0 2px 10px rgba(0, 50, 20, 0.03)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f7faf8;
+      color: #0f172a;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* Subtle background ambient mesh */
+    .bg-dashboard-canvas {
+      background: 
+        radial-gradient(circle at 88% 8%, rgba(167, 243, 208, 0.35) 0%, rgba(209, 250, 229, 0.15) 30%, transparent 60%),
+        radial-gradient(circle at 10% 90%, rgba(187, 247, 208, 0.25) 0%, transparent 40%),
+        #f5f9f6;
+    }
+
+    /* Sidebar wave background container */
+    .sidebar-wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Custom subtle scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    /* Phone Mockup 3D Perspective */
+    .phone-perspective {
+      transform: perspective(900px) rotateY(-18deg) rotateX(8deg) rotateZ(3deg);
+      transition: transform 0.4s ease;
+    }
+    .phone-perspective:hover {
+      transform: perspective(900px) rotateY(-12deg) rotateX(4deg) rotateZ(1deg) scale(1.03);
+    }
+  </style>
+</head>
+
+<body class="bg-dashboard-canvas flex flex-col min-h-screen selection:bg-brand-200 selection:text-brand-900">
+
+  <!-- ==================== MOBILE TOP NAVBAR (Visible on < lg screens) ==================== -->
+  <header class="lg:hidden sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 px-4 py-3 flex items-center justify-between shadow-xs">
+    <div class="flex items-center gap-3">
+      <!-- Mobile Sidebar Hamburger Toggle -->
+      <button id="mobile-sidebar-toggle" class="p-2 rounded-xl text-slate-700 bg-slate-100 hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500" aria-label="Open Menu">
+        <i class="ph-bold ph-list text-xl"></i>
+      </button>
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="flex items-center">
+        <img src="assets/images/smartedge-logo.png" alt="SmartEdge" class="h-11 w-auto object-contain">
+      </a>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <!-- Notification Button -->
+      <button class="relative p-2 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 shadow-xs" title="Notifications">
+        <i class="ph-duotone ph-bell text-lg"></i>
+        <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full ring-2 ring-white"></span>
+      </button>
+      
+      <!-- User Profile Pill -->
+      <div class="flex items-center gap-1.5 px-3 py-1.5 bg-[#00875a] text-white rounded-full text-xs font-semibold shadow-xs">
+        <i class="ph-duotone ph-storefront text-sm"></i>
+        <span class="max-w-[110px] truncate">BIZR109</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN SHELL (SIDEBAR + CONTENT) ==================== -->
+  <div class="flex-grow flex relative w-full">
+
+    <!-- BACKDROP FOR MOBILE SIDEBAR -->
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-40 hidden lg:hidden transition-opacity"></div>
+
+    <!-- ==================== LEFT SIDEBAR ==================== -->
+    <aside id="sidebar-container" class="fixed inset-y-0 left-0 z-50 w-[240px] xl:w-[252px] bg-white border-r border-slate-200/70 flex flex-col justify-between py-5 px-3 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out lg:sticky lg:top-0 lg:h-screen lg:z-30 select-none shadow-sm lg:shadow-none overflow-hidden">
+      
+      <!-- TOP: LOGO & NAV -->
+      <div class="relative z-10 flex flex-col space-y-6">
+        
+        <!-- SIDEBAR BRAND LOGO -->
+        <div class="px-2 pt-1 pb-1 flex items-center justify-between">
+          <a href="index.html" class="flex items-center group">
+            <img 
+              src="assets/images/smartedge-logo.png" 
+              alt="SmartEdge - FAST • SECURE • SMART PAYMENTS" 
+              class="h-[54px] xl:h-[58px] w-auto object-contain transition-transform duration-200 group-hover:scale-102"
+            />
+          </a>
+          <!-- Close Mobile Sidebar Button -->
+          <button id="close-sidebar-btn" class="lg:hidden p-1.5 rounded-lg text-slate-500 hover:bg-slate-100">
+            <i class="ph-bold ph-x text-lg"></i>
+          </button>
+        </div>
+
+        <!-- NAVIGATION MENU LIST -->
+        <nav class="space-y-1.5 px-1 font-medium text-[14.5px]">
+          
+          <!-- 1. Dashboard (Active) -->
+          <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-[#00875a] to-[#00a86b] text-white font-semibold shadow-nav-active transition-all">
+            <i class="ph-duotone ph-squares-four text-xl"></i>
+            <span class="tracking-wide">Dashboard</span>
+          </a>
+
+          <!-- 2. Fund Request -->
+          <a href="#fund-request" class="group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-[#00875a] transition-all">
+            <div class="flex items-center gap-3">
+              <i class="ph-duotone ph-wallet text-xl text-slate-600 group-hover:text-[#00875a] transition-colors"></i>
+              <span>Fund Request</span>
+            </div>
+            <i class="ph-bold ph-caret-right text-xs text-slate-400 group-hover:text-[#00875a] group-hover:translate-x-0.5 transition-all"></i>
+          </a>
+
+          <!-- 3. Transactions -->
+          <a href="#transactions" class="group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-[#00875a] transition-all">
+            <div class="flex items-center gap-3">
+              <i class="ph-duotone ph-receipt text-xl text-slate-600 group-hover:text-[#00875a] transition-colors"></i>
+              <span>Transactions</span>
+            </div>
+            <i class="ph-bold ph-caret-right text-xs text-slate-400 group-hover:text-[#00875a] group-hover:translate-x-0.5 transition-all"></i>
+          </a>
+
+          <!-- 4. Reports -->
+          <a href="#reports" class="group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-[#00875a] transition-all">
+            <div class="flex items-center gap-3">
+              <i class="ph-duotone ph-chart-line-up text-xl text-slate-600 group-hover:text-[#00875a] transition-colors"></i>
+              <span>Reports</span>
+            </div>
+            <i class="ph-bold ph-caret-right text-xs text-slate-400 group-hover:text-[#00875a] group-hover:translate-x-0.5 transition-all"></i>
+          </a>
+
+          <!-- 5. Settlement -->
+          <a href="#settlement" class="group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-[#00875a] transition-all">
+            <div class="flex items-center gap-3">
+              <i class="ph-duotone ph-bank text-xl text-slate-600 group-hover:text-[#00875a] transition-colors"></i>
+              <span>Settlement</span>
+            </div>
+            <i class="ph-bold ph-caret-right text-xs text-slate-400 group-hover:text-[#00875a] group-hover:translate-x-0.5 transition-all"></i>
+          </a>
+
+          <!-- 6. Setting -->
+          <a href="#settings" class="group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-[#00875a] transition-all">
+            <div class="flex items-center gap-3">
+              <i class="ph-duotone ph-gear text-xl text-slate-600 group-hover:text-[#00875a] transition-colors"></i>
+              <span>Setting</span>
+            </div>
+            <i class="ph-bold ph-caret-right text-xs text-slate-400 group-hover:text-[#00875a] group-hover:translate-x-0.5 transition-all"></i>
+          </a>
+
+          <!-- 7. AEPS Drivers -->
+          <a href="#aeps-drivers" class="group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-[#00875a] transition-all">
+            <div class="flex items-center gap-3">
+              <i class="ph-duotone ph-fingerprint text-xl text-slate-600 group-hover:text-[#00875a] transition-colors"></i>
+              <span>AEPS Drivers</span>
+            </div>
+            <i class="ph-bold ph-caret-right text-xs text-slate-400 group-hover:text-[#00875a] group-hover:translate-x-0.5 transition-all"></i>
+          </a>
+        </nav>
+      </div>
+
+      <!-- BOTTOM: LOGOUT BUTTON & VIBRANT GREEN CORNER WAVES -->
+      <div class="relative z-10 px-2 pb-2 mt-auto">
+        
+        <!-- LOGOUT PILL BUTTON -->
+        <a href="index.html" class="flex items-center justify-center gap-2.5 w-full py-2.5 px-4 rounded-xl border-1.5 border-[#00875a] text-[#00875a] hover:bg-[#00875a] hover:text-white font-semibold text-sm transition-all shadow-xs group bg-white/90 backdrop-blur-xs">
+          <i class="ph-bold ph-sign-out text-base group-hover:-translate-x-0.5 transition-transform"></i>
+          <span>Logout</span>
+        </a>
+
+      </div>
+
+      <!-- DECORATIVE BOTTOML-LEFT CORNER WAVES -->
+      <div class="sidebar-wave">
+        <svg class="w-full h-28" viewBox="0 0 250 120" fill="none" preserveAspectRatio="none">
+          <path d="M0 120 C 60 70, 140 130, 250 50 L 250 120 Z" fill="url(#sidebarWave1)" opacity="0.6"/>
+          <path d="M0 120 C 40 40, 120 90, 220 20 L 250 120 Z" fill="url(#sidebarWave2)" opacity="0.75"/>
+          <path d="M0 120 C 70 80, 110 50, 180 120 Z" fill="#00875a" opacity="0.5"/>
+          <defs>
+            <linearGradient id="sidebarWave1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#34d399"/>
+              <stop offset="100%" stop-color="#059669"/>
+            </linearGradient>
+            <linearGradient id="sidebarWave2" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#6ee7b7"/>
+              <stop offset="100%" stop-color="#00875a"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+    </aside>
+
+    <!-- ==================== MAIN DASHBOARD CONTENT AREA ==================== -->
+    <main class="flex-1 w-full max-w-[1600px] px-3.5 sm:px-6 lg:px-7 xl:px-8 py-5 sm:py-6 flex flex-col justify-between overflow-x-hidden">
+
+      <div class="space-y-6">
+        
+        <!-- ==================== 1. TOP GREETING & HEADER ACTION BAR ==================== -->
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          
+          <!-- Left: Greeting Header -->
+          <div>
+            <div class="flex items-center gap-2">
+              <h1 class="text-2xl sm:text-[26px] font-extrabold text-slate-900 tracking-tight">
+                Hello, Mehul Enterprises
+              </h1>
+              <span class="text-2xl animate-pulse">👋</span>
+            </div>
+            <p class="text-slate-500 text-sm mt-0.5 font-medium">
+              Here's your business overview for today.
+            </p>
+          </div>
+
+          <!-- Right: Search Bar, Notifications & Profile Badge -->
+          <div class="flex flex-wrap items-center gap-3 sm:gap-3.5">
+            
+            <!-- SEARCH BAR -->
+            <div class="relative w-full sm:w-[280px] xl:w-[320px]">
+              <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <i class="ph-duotone ph-magnifying-glass text-lg"></i>
+              </div>
+              <input 
+                type="text" 
+                id="search-input"
+                placeholder="Search transactions, UTR, mobile..." 
+                class="w-full pl-10 pr-12 py-2 text-xs sm:text-[13px] rounded-full bg-white border border-slate-200/90 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#00875a] focus:ring-2 focus:ring-[#00875a]/15 shadow-pill-soft transition-all"
+              />
+              <div class="absolute inset-y-0 right-0 pr-2.5 flex items-center">
+                <span class="inline-flex items-center px-1.5 py-0.5 text-[10px] font-semibold text-slate-500 bg-slate-100 rounded border border-slate-200/80">
+                  ⌘K
+                </span>
+              </div>
+            </div>
+
+            <!-- NOTIFICATION BELL BUTTON -->
+            <button class="relative hidden sm:flex items-center justify-center w-9 h-9 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 shadow-pill-soft transition-all" title="Notifications">
+              <i class="ph-duotone ph-bell text-lg"></i>
+              <!-- Red active badge -->
+              <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full ring-2 ring-white"></span>
+            </button>
+
+            <!-- USER ACCOUNT / BUSINESS PILL BADGE -->
+            <div class="relative group">
+              <button class="flex items-center gap-2 px-3.5 py-2 rounded-full bg-[#00875a] hover:bg-[#00754e] text-white shadow-pill-soft transition-all cursor-pointer">
+                <div class="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
+                  <i class="ph-duotone ph-storefront text-xs text-white"></i>
+                </div>
+                <span class="text-xs sm:text-[13px] font-bold tracking-tight">
+                  (BIZR109) - MEHUL ENTERPRISES
+                </span>
+                <i class="ph-bold ph-caret-down text-xs ml-0.5"></i>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ==================== 2. TOP 3 WALLET & STAT METRIC CARDS ==================== -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 xl:gap-6">
+          
+          <!-- CARD 1: WALLET BALANCE -->
+          <div class="relative bg-white rounded-2xl p-5 border border-slate-100 shadow-card-soft overflow-hidden hover:shadow-md transition-shadow">
+            <div class="relative z-10 flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-[#00875a]">
+                  <i class="ph-duotone ph-wallet text-xl"></i>
+                </div>
+                <span class="text-xs sm:text-[13px] font-semibold text-slate-600">Wallet Balance</span>
+              </div>
+              <button class="text-slate-400 hover:text-slate-700 transition-colors toggle-balance-btn" data-target="val-wallet" title="Toggle visibility">
+                <i class="ph-duotone ph-eye text-lg"></i>
+              </button>
+            </div>
+            
+            <div class="relative z-10">
+              <div class="text-2xl sm:text-[27px] font-extrabold text-slate-900 tracking-tight" id="val-wallet" data-real="₹ 104.09">
+                ₹ 104.09
+              </div>
+            </div>
+
+            <!-- Card Bottom Right Mint Wave Vector -->
+            <svg class="absolute bottom-0 right-0 w-36 h-12 pointer-events-none opacity-85" viewBox="0 0 150 50" fill="none">
+              <path d="M0 50 Q 50 15, 100 35 T 150 10 L 150 50 Z" fill="url(#mintWaveGrad)"/>
+              <defs>
+                <linearGradient id="mintWaveGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#bbf7d0" stop-opacity="0.2"/>
+                  <stop offset="100%" stop-color="#34d399" stop-opacity="0.45"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+
+          <!-- CARD 2: AEPS WALLET -->
+          <div class="relative bg-white rounded-2xl p-5 border border-slate-100 shadow-card-soft overflow-hidden hover:shadow-md transition-shadow">
+            <div class="relative z-10 flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-xl bg-cyan-50 border border-cyan-100 flex items-center justify-center text-cyan-600">
+                  <i class="ph-duotone ph-stack text-xl"></i>
+                </div>
+                <span class="text-xs sm:text-[13px] font-semibold text-slate-600">AEPS Wallet</span>
+              </div>
+              <button class="text-slate-400 hover:text-slate-700 transition-colors toggle-balance-btn" data-target="val-aeps" title="Toggle visibility">
+                <i class="ph-duotone ph-eye text-lg"></i>
+              </button>
+            </div>
+            
+            <div class="relative z-10">
+              <div class="text-2xl sm:text-[27px] font-extrabold text-slate-900 tracking-tight" id="val-aeps" data-real="₹ 0.00">
+                ₹ 0.00
+              </div>
+            </div>
+
+            <!-- Card Bottom Right Cyan Wave Vector -->
+            <svg class="absolute bottom-0 right-0 w-36 h-12 pointer-events-none opacity-75" viewBox="0 0 150 50" fill="none">
+              <path d="M0 50 Q 60 20, 110 38 T 150 15 L 150 50 Z" fill="url(#cyanWaveGrad)"/>
+              <defs>
+                <linearGradient id="cyanWaveGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#bae6fd" stop-opacity="0.2"/>
+                  <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.4"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+
+          <!-- CARD 3: COMMISSION -->
+          <div class="relative bg-white rounded-2xl p-5 border border-slate-100 shadow-card-soft overflow-hidden hover:shadow-md transition-shadow sm:col-span-2 lg:col-span-1">
+            <div class="relative z-10 flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-xl bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-500">
+                  <i class="ph-duotone ph-percent text-xl"></i>
+                </div>
+                <span class="text-xs sm:text-[13px] font-semibold text-slate-600">Commission</span>
+              </div>
+              <button class="text-slate-400 hover:text-slate-700 transition-colors toggle-balance-btn" data-target="val-comm" title="Toggle visibility">
+                <i class="ph-duotone ph-eye text-lg"></i>
+              </button>
+            </div>
+            
+            <div class="relative z-10">
+              <div class="text-2xl sm:text-[27px] font-extrabold text-slate-900 tracking-tight" id="val-comm" data-real="₹ 60.32">
+                ₹ 60.32
+              </div>
+            </div>
+
+            <!-- Card Bottom Right Amber Wave Vector -->
+            <svg class="absolute bottom-0 right-0 w-36 h-12 pointer-events-none opacity-70" viewBox="0 0 150 50" fill="none">
+              <path d="M0 50 Q 55 25, 105 40 T 150 18 L 150 50 Z" fill="url(#amberWaveGrad)"/>
+              <defs>
+                <linearGradient id="amberWaveGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#fef08a" stop-opacity="0.2"/>
+                  <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.35"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+
+        </div>
+
+        <!-- ==================== 3. MIDDLE SECTION: QUICK ACTIONS & SMARTEDGE BANNER ==================== -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 xl:gap-6 items-stretch">
+          
+          <!-- 3A: QUICK ACTIONS -->
+          <div class="lg:col-span-8 bg-white rounded-2xl p-5 sm:p-6 border border-slate-100 shadow-card-soft flex flex-col justify-between">
+            
+            <!-- Quick Actions Header -->
+            <div class="flex items-center justify-between mb-5">
+              <div>
+                <h2 class="text-base sm:text-lg font-bold text-slate-900 tracking-tight">Quick Actions</h2>
+                <p class="text-slate-500 text-xs sm:text-[13px]">Perform your most common tasks quickly</p>
+              </div>
+              <a href="#services" class="inline-flex items-center gap-1.5 text-xs sm:text-[13px] font-semibold text-[#00875a] hover:text-[#00754e] hover:underline group">
+                <span>View All Services</span>
+                <i class="ph-bold ph-arrow-right text-xs group-hover:translate-x-0.5 transition-transform"></i>
+              </a>
+            </div>
+
+            <!-- 7 Quick Action Service Tiles Grid -->
+            <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-2.5 sm:gap-3">
+              
+              <!-- 1. Money Transfer (Active / Highlighted) -->
+              <button class="flex flex-col items-center justify-center p-3 rounded-2xl bg-[#ecfdf5] border-1.5 border-[#a7f3d0] hover:bg-[#d1fae5] hover:border-[#6ee7b7] shadow-quick-btn transition-all group focus:outline-none">
+                <div class="w-10 h-10 rounded-xl bg-white text-[#00875a] flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform mb-2">
+                  <i class="ph-duotone ph-paper-plane-tilt text-2xl"></i>
+                </div>
+                <span class="text-[11.5px] font-semibold text-slate-800 text-center leading-tight">
+                  Money<br>Transfer
+                </span>
+              </button>
+
+              <!-- 2. Money Transfer 2 -->
+              <button class="flex flex-col items-center justify-center p-3 rounded-2xl bg-white border border-slate-200/90 hover:border-[#00875a]/50 hover:bg-slate-50/80 shadow-quick-btn transition-all group focus:outline-none">
+                <div class="w-10 h-10 rounded-xl bg-slate-50 text-[#00875a] flex items-center justify-center group-hover:scale-105 transition-transform mb-2">
+                  <i class="ph-duotone ph-arrows-left-right text-2xl"></i>
+                </div>
+                <span class="text-[11.5px] font-semibold text-slate-800 text-center leading-tight">
+                  Money<br>Transfer 2
+                </span>
+              </button>
+
+              <!-- 3. BizPPI Transfer -->
+              <button class="flex flex-col items-center justify-center p-3 rounded-2xl bg-white border border-slate-200/90 hover:border-[#00875a]/50 hover:bg-slate-50/80 shadow-quick-btn transition-all group focus:outline-none">
+                <div class="w-10 h-10 rounded-xl bg-slate-50 text-[#00875a] flex items-center justify-center group-hover:scale-105 transition-transform mb-2">
+                  <i class="ph-duotone ph-credit-card text-2xl"></i>
+                </div>
+                <span class="text-[11.5px] font-semibold text-slate-800 text-center leading-tight">
+                  BizPPI<br>Transfer
+                </span>
+              </button>
+
+              <!-- 4. Flight Booking -->
+              <button class="flex flex-col items-center justify-center p-3 rounded-2xl bg-white border border-slate-200/90 hover:border-[#00875a]/50 hover:bg-slate-50/80 shadow-quick-btn transition-all group focus:outline-none">
+                <div class="w-10 h-10 rounded-xl bg-slate-50 text-[#00875a] flex items-center justify-center group-hover:scale-105 transition-transform mb-2">
+                  <i class="ph-duotone ph-airplane-tilt text-2xl"></i>
+                </div>
+                <span class="text-[11.5px] font-semibold text-slate-800 text-center leading-tight">
+                  Flight<br>Booking
+                </span>
+              </button>
+
+              <!-- 5. Recharge-II -->
+              <button class="flex flex-col items-center justify-center p-3 rounded-2xl bg-white border border-slate-200/90 hover:border-[#00875a]/50 hover:bg-slate-50/80 shadow-quick-btn transition-all group focus:outline-none">
+                <div class="w-10 h-10 rounded-xl bg-slate-50 text-[#00875a] flex items-center justify-center group-hover:scale-105 transition-transform mb-2">
+                  <i class="ph-duotone ph-lightning text-2xl"></i>
+                </div>
+                <span class="text-[11.5px] font-semibold text-slate-800 text-center leading-tight">
+                  Recharge-II
+                </span>
+              </button>
+
+              <!-- 6. Redeem -->
+              <button class="flex flex-col items-center justify-center p-3 rounded-2xl bg-white border border-slate-200/90 hover:border-[#00875a]/50 hover:bg-slate-50/80 shadow-quick-btn transition-all group focus:outline-none">
+                <div class="w-10 h-10 rounded-xl bg-slate-50 text-[#00875a] flex items-center justify-center group-hover:scale-105 transition-transform mb-2">
+                  <i class="ph-duotone ph-gift text-2xl"></i>
+                </div>
+                <span class="text-[11.5px] font-semibold text-slate-800 text-center leading-tight">
+                  Redeem
+                </span>
+              </button>
+
+              <!-- 7. SmartWallet -->
+              <button class="flex flex-col items-center justify-center p-3 rounded-2xl bg-white border border-slate-200/90 hover:border-[#00875a]/50 hover:bg-slate-50/80 shadow-quick-btn transition-all group focus:outline-none">
+                <div class="w-10 h-10 rounded-xl bg-slate-50 text-[#00875a] flex items-center justify-center group-hover:scale-105 transition-transform mb-2">
+                  <i class="ph-duotone ph-wallet text-2xl"></i>
+                </div>
+                <span class="text-[11.5px] font-semibold text-slate-800 text-center leading-tight">
+                  SmartWallet
+                </span>
+              </button>
+
+            </div>
+
+          </div>
+
+          <!-- 3B: SMARTEDGE PROMO BANNER -->
+          <div class="lg:col-span-4 rounded-2xl bg-gradient-to-br from-[#064e3b] via-[#00875a] to-[#10b981] p-5 sm:p-6 text-white shadow-card-soft relative overflow-hidden flex flex-col justify-between">
+            
+            <!-- Geometric dot pattern overlay -->
+            <div class="absolute inset-0 opacity-15 pointer-events-none" style="background-image: radial-gradient(circle, #ffffff 1.2px, transparent 1.2px); background-size: 16px 16px;"></div>
+            
+            <!-- Curved abstract wave light on the bottom right -->
+            <div class="absolute -bottom-10 -right-10 w-48 h-48 rounded-full bg-emerald-300/20 blur-2xl pointer-events-none"></div>
+
+            <div class="relative z-10 flex items-center justify-between gap-2">
+              
+              <!-- Left: Promo Text -->
+              <div class="flex-1 pr-2">
+                <h3 class="text-xl sm:text-2xl font-extrabold tracking-tight">SmartEdge</h3>
+                <p class="text-xs sm:text-sm text-emerald-50 mt-1 leading-snug font-medium">
+                  Fast • Secure • Reliable<br>Payment Solutions
+                </p>
+                
+                <div class="mt-4">
+                  <a href="#explore" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white text-slate-900 font-bold text-xs shadow-md hover:bg-emerald-50 hover:text-[#00875a] transition-all group">
+                    <span>Explore Services</span>
+                    <i class="ph-bold ph-arrow-right text-xs text-[#00875a] group-hover:translate-x-0.5 transition-transform"></i>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Right: Sleek Smartphone Mockup with SmartEdge Display -->
+              <div class="w-24 sm:w-28 flex-shrink-0 flex items-center justify-center">
+                <div class="phone-perspective relative w-20 sm:w-24 h-36 sm:h-40 bg-slate-900 rounded-[22px] p-1.5 shadow-2xl border-2 border-emerald-300/40">
+                  <!-- Phone Speaker & Notch -->
+                  <div class="absolute top-2.5 left-1/2 -translate-x-1/2 w-6 h-1 bg-slate-700 rounded-full z-20"></div>
+                  
+                  <!-- Phone Screen -->
+                  <div class="w-full h-full rounded-[16px] bg-gradient-to-b from-[#064e3b] via-[#00875a] to-[#10b981] flex flex-col items-center justify-center p-2 relative overflow-hidden">
+                    <!-- Glass sheen reflection -->
+                    <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent pointer-events-none"></div>
+                    
+                    <!-- SmartEdge 'S' Box Logo on Phone Screen -->
+                    <div class="w-10 h-10 rounded-xl bg-white shadow-lg flex items-center justify-center p-1.5 relative z-10">
+                      <svg viewBox="0 0 100 100" class="w-full h-full" fill="none">
+                        <rect width="100" height="100" rx="22" fill="#00875a"/>
+                        <path d="M 68 32 C 64 26 56 24 48 24 C 36 24 28 30 28 40 C 28 58 72 46 72 65 C 72 76 63 80 50 80 C 40 80 32 75 28 68" stroke="#ffffff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M 68 22 L 76 34 L 62 38" fill="#4ade80"/>
+                      </svg>
+                    </div>
+                    <span class="text-[9px] font-extrabold text-white tracking-wider mt-2 relative z-10 uppercase">SmartEdge</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ==================== 4. BOTTOM SECTION: TRANSACTIONS TABLE & BUSINESS SUMMARY ==================== -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 xl:gap-6 items-start">
+          
+          <!-- 4A: LAST 10 TRANSACTIONS -->
+          <div class="lg:col-span-8 bg-white rounded-2xl p-5 sm:p-6 border border-slate-100 shadow-card-soft overflow-hidden">
+            
+            <!-- Table Header Bar -->
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center text-[#00875a]">
+                  <i class="ph-duotone ph-receipt text-lg"></i>
+                </div>
+                <h2 class="text-base sm:text-lg font-bold text-slate-900 tracking-tight">Last 10 Transactions</h2>
+              </div>
+              
+              <a href="#all-transactions" class="inline-flex items-center gap-1.5 text-xs sm:text-[13px] font-semibold text-[#00875a] hover:text-[#00754e] hover:underline group">
+                <span>View All Transactions</span>
+                <i class="ph-bold ph-arrow-right text-xs group-hover:translate-x-0.5 transition-transform"></i>
+              </a>
+            </div>
+
+            <!-- Responsive Table Container -->
+            <div class="overflow-x-auto -mx-5 sm:-mx-6 px-5 sm:px-6">
+              <table class="w-full text-left border-collapse min-w-[680px]">
+                <thead>
+                  <tr class="border-b border-slate-100 text-slate-800 text-[11.5px] font-bold">
+                    <th class="py-3 px-3 font-bold">Date &amp; Time</th>
+                    <th class="py-3 px-3 font-bold">Sender Mobile</th>
+                    <th class="py-3 px-3 font-bold">Account No</th>
+                    <th class="py-3 px-3 font-bold">Amount</th>
+                    <th class="py-3 px-3 font-bold text-center">Status</th>
+                    <th class="py-3 px-3 font-bold">UTRNO</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-xs sm:text-[12.5px] text-slate-700">
+                  
+                  <!-- ROW 1 -->
+                  <tr class="hover:bg-slate-50/70 transition-colors">
+                    <td class="py-3 px-3 font-medium whitespace-nowrap text-slate-900">Nov 7 2026, 9:30 PM</td>
+                    <td class="py-3 px-3 font-medium text-slate-800">7011741998</td>
+                    <td class="py-3 px-3 font-mono text-slate-600">064822010000283</td>
+                    <td class="py-3 px-3 font-semibold text-slate-900 whitespace-nowrap">₹ 19,999.00</td>
+                    <td class="py-3 px-3 text-center">
+                      <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#dcfce7] text-[#166534]">
+                        <i class="ph-bold ph-check text-[11px]"></i>
+                        Success
+                      </span>
+                    </td>
+                    <td class="py-3 px-3 font-mono text-slate-600">631128073926</td>
+                  </tr>
+
+                  <!-- ROW 2 -->
+                  <tr class="hover:bg-slate-50/70 transition-colors">
+                    <td class="py-3 px-3 font-medium whitespace-nowrap text-slate-900">Nov 7 2026, 9:29 PM</td>
+                    <td class="py-3 px-3 font-medium text-slate-800">7011741998</td>
+                    <td class="py-3 px-3 font-mono text-slate-600">064822010000283</td>
+                    <td class="py-3 px-3 font-semibold text-slate-900 whitespace-nowrap">₹ 0.00</td>
+                    <td class="py-3 px-3 text-center">
+                      <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#fef3c7] text-[#b45309]">
+                        <i class="ph-duotone ph-warning-circle text-[12px]"></i>
+                        Verification
+                      </span>
+                    </td>
+                    <td class="py-3 px-3 font-mono text-slate-400">-</td>
+                  </tr>
+
+                  <!-- ROW 3 -->
+                  <tr class="hover:bg-slate-50/70 transition-colors">
+                    <td class="py-3 px-3 font-medium whitespace-nowrap text-slate-900">Nov 5 2026, 5:57 PM</td>
+                    <td class="py-3 px-3 font-medium text-slate-800">7011741998</td>
+                    <td class="py-3 px-3 font-mono text-slate-600">15380200008679</td>
+                    <td class="py-3 px-3 font-semibold text-slate-900 whitespace-nowrap">₹ 0.00</td>
+                    <td class="py-3 px-3 text-center">
+                      <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#fef3c7] text-[#b45309]">
+                        <i class="ph-duotone ph-warning-circle text-[12px]"></i>
+                        Verification
+                      </span>
+                    </td>
+                    <td class="py-3 px-3 font-mono text-slate-400">-</td>
+                  </tr>
+
+                  <!-- ROW 4 -->
+                  <tr class="hover:bg-slate-50/70 transition-colors">
+                    <td class="py-3 px-3 font-medium whitespace-nowrap text-slate-900">Nov 2 2026, 4:34 PM</td>
+                    <td class="py-3 px-3 font-medium text-slate-800">7011741998</td>
+                    <td class="py-3 px-3 font-mono text-slate-600">002912100024052</td>
+                    <td class="py-3 px-3 font-semibold text-slate-900 whitespace-nowrap">₹ 5,00,000.00</td>
+                    <td class="py-3 px-3 text-center">
+                      <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#dcfce7] text-[#166534]">
+                        <i class="ph-bold ph-check text-[11px]"></i>
+                        Success
+                      </span>
+                    </td>
+                    <td class="py-3 px-3 font-mono text-slate-600">630616097916</td>
+                  </tr>
+
+                  <!-- ROW 5 -->
+                  <tr class="hover:bg-slate-50/70 transition-colors">
+                    <td class="py-3 px-3 font-medium whitespace-nowrap text-slate-900">Nov 2 2026, 4:32 PM</td>
+                    <td class="py-3 px-3 font-medium text-slate-800">7011741998</td>
+                    <td class="py-3 px-3 font-mono text-slate-600">20387713681</td>
+                    <td class="py-3 px-3 font-semibold text-slate-900 whitespace-nowrap">₹ 5,00,000.00</td>
+                    <td class="py-3 px-3 text-center">
+                      <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#dcfce7] text-[#166534]">
+                        <i class="ph-bold ph-check text-[11px]"></i>
+                        Success
+                      </span>
+                    </td>
+                    <td class="py-3 px-3 font-mono text-slate-600">630616096903</td>
+                  </tr>
+
+                  <!-- ROW 6 -->
+                  <tr class="hover:bg-slate-50/70 transition-colors">
+                    <td class="py-3 px-3 font-medium whitespace-nowrap text-slate-900">Nov 2 2026, 4:26 PM</td>
+                    <td class="py-3 px-3 font-medium text-slate-800">7011741998</td>
+                    <td class="py-3 px-3 font-mono text-slate-600">20387713681</td>
+                    <td class="py-3 px-3 font-semibold text-slate-900 whitespace-nowrap">₹ 5,00,000.00</td>
+                    <td class="py-3 px-3 text-center">
+                      <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#fee2e2] text-[#b91c1c]">
+                        <i class="ph-bold ph-arrow-counter-clockwise text-[11px]"></i>
+                        Refund
+                      </span>
+                    </td>
+                    <td class="py-3 px-3 font-mono text-slate-400">-</td>
+                  </tr>
+
+                  <!-- ROW 7 -->
+                  <tr class="hover:bg-slate-50/70 transition-colors">
+                    <td class="py-3 px-3 font-medium whitespace-nowrap text-slate-900">Nov 2 2026, 4:25 PM</td>
+                    <td class="py-3 px-3 font-medium text-slate-800">7011741998</td>
+                    <td class="py-3 px-3 font-mono text-slate-600">002912100024052</td>
+                    <td class="py-3 px-3 font-semibold text-slate-900 whitespace-nowrap">₹ 5,00,000.00</td>
+                    <td class="py-3 px-3 text-center">
+                      <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#fee2e2] text-[#b91c1c]">
+                        <i class="ph-bold ph-arrow-counter-clockwise text-[11px]"></i>
+                        Refund
+                      </span>
+                    </td>
+                    <td class="py-3 px-3 font-mono text-slate-400">-</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+
+          <!-- 4B: BUSINESS SUMMARY & CHART -->
+          <div class="lg:col-span-4 bg-white rounded-2xl p-5 sm:p-6 border border-slate-100 shadow-card-soft flex flex-col justify-between">
+            
+            <!-- Summary Header -->
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-lg bg-emerald-50 flex items-center justify-center text-[#00875a]">
+                  <i class="ph-duotone ph-chart-line-up text-lg"></i>
+                </div>
+                <h2 class="text-base font-bold text-slate-900 tracking-tight">Business Summary</h2>
+              </div>
+              
+              <!-- Dropdown Filter -->
+              <div class="relative">
+                <button class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg border border-slate-200 text-xs font-semibold text-slate-700 bg-white hover:bg-slate-50 shadow-xs">
+                  <span>This Month</span>
+                  <i class="ph-bold ph-caret-down text-xs"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Monthly Business Amount & Growth Indicator -->
+            <div class="space-y-1 mb-2">
+              <span class="text-xs font-semibold text-slate-500">Monthly Business</span>
+              <div class="text-2xl sm:text-[26px] font-extrabold text-slate-900 tracking-tight">
+                ₹ 10,19,999.00
+              </div>
+              <div class="flex items-center gap-2 pt-0.5">
+                <span class="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[11px] font-bold bg-[#dcfce7] text-[#166534]">
+                  <i class="ph-bold ph-arrow-up text-xs"></i>
+                  +12.4%
+                </span>
+                <span class="text-xs text-slate-500 font-medium">vs last month</span>
+              </div>
+            </div>
+
+            <!-- Smooth Green Curved Trendline Chart with Tooltip Badge -->
+            <div class="relative w-full h-24 my-2">
+              
+              <!-- Floating Pill Peak Badge -->
+              <div class="absolute top-1 right-1 z-10 inline-flex items-center px-2 py-0.5 rounded-md bg-[#064e3b] text-white text-[10px] font-bold shadow-sm">
+                ₹ 10,19,999.00
+              </div>
+
+              <!-- SVG Line Curve & Area Fill -->
+              <svg class="w-full h-full overflow-visible" viewBox="0 0 320 90" fill="none" preserveAspectRatio="none">
+                <!-- Area Fill -->
+                <path d="M 0 85 C 40 80, 80 82, 130 65 C 180 48, 220 70, 270 30 C 295 12, 305 10, 320 8 L 320 90 L 0 90 Z" fill="url(#chartGreenGrad)"/>
+                
+                <!-- Stroke Curve -->
+                <path d="M 0 85 C 40 80, 80 82, 130 65 C 180 48, 220 70, 270 30 C 295 12, 305 10, 320 8" stroke="#22c55e" stroke-width="3" stroke-linecap="round"/>
+                
+                <!-- Peak Circle Marker -->
+                <circle cx="320" cy="8" r="4.5" fill="#16a34a" stroke="#ffffff" stroke-width="2"/>
+
+                <defs>
+                  <linearGradient id="chartGreenGrad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#4ade80" stop-opacity="0.35"/>
+                    <stop offset="60%" stop-color="#bbf7d0" stop-opacity="0.15"/>
+                    <stop offset="100%" stop-color="#ffffff" stop-opacity="0.0"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+
+            <!-- Bottom 3 Summary Metric Boxes -->
+            <div class="grid grid-cols-3 gap-2 pt-3 border-t border-slate-100">
+              
+              <!-- 1. Today Transactions -->
+              <div class="flex flex-col">
+                <div class="w-6 h-6 rounded-md bg-emerald-50 text-[#00875a] flex items-center justify-center mb-1.5">
+                  <i class="ph-duotone ph-arrows-left-right text-base"></i>
+                </div>
+                <span class="text-[10.5px] font-medium text-slate-500 leading-tight">Today Transactions</span>
+                <span class="text-xs sm:text-sm font-extrabold text-slate-900 mt-1">₹ 0.00</span>
+              </div>
+
+              <!-- 2. Today Borrowed Amount -->
+              <div class="flex flex-col">
+                <div class="w-6 h-6 rounded-md bg-rose-50 text-rose-500 flex items-center justify-center mb-1.5">
+                  <i class="ph-duotone ph-stack text-base"></i>
+                </div>
+                <span class="text-[10.5px] font-medium text-slate-500 leading-tight">Today Borrowed Amount</span>
+                <span class="text-xs sm:text-sm font-extrabold text-slate-900 mt-1">₹ 0.00</span>
+              </div>
+
+              <!-- 3. Total Reversal Transactions -->
+              <div class="flex flex-col">
+                <div class="w-6 h-6 rounded-md bg-sky-50 text-sky-500 flex items-center justify-center mb-1.5">
+                  <i class="ph-duotone ph-arrows-clockwise text-base"></i>
+                </div>
+                <span class="text-[10.5px] font-medium text-slate-500 leading-tight">Total Reversal Transactions</span>
+                <span class="text-xs sm:text-sm font-extrabold text-slate-900 mt-1">₹ 0.00</span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ==================== 5. FOOTER ==================== -->
+      <footer class="mt-8 pt-4 pb-2 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+        
+        <!-- Copyright Text -->
+        <div class="text-center sm:text-left">
+          Copyright &copy; 2024 Smart Edge &amp; Utility Solutions Private Limited. All rights reserved.
+        </div>
+
+        <!-- Powered by SmartEdge -->
+        <div class="flex items-center gap-1.5 text-slate-600 font-medium">
+          <span>Powered by</span>
+          <div class="flex items-center gap-1 font-bold text-slate-900">
+            <!-- Green 'S' badge -->
+            <div class="w-4 h-4 rounded bg-[#00875a] flex items-center justify-center text-white text-[10px] font-black">
+              S
+            </div>
+            <span class="tracking-tight text-slate-900 font-extrabold text-xs">SmartEdge</span>
+          </div>
+        </div>
+
+      </footer>
+
+    </main>
+
+  </div>
+
+  <!-- ==================== SCRIPT FOR DYNAMIC INTERACTIONS ==================== -->
+  <script>
+    // Mobile Sidebar Toggle
+    const mobileSidebarToggle = document.getElementById('mobile-sidebar-toggle');
+    const closeSidebarBtn = document.getElementById('close-sidebar-btn');
+    const sidebarContainer = document.getElementById('sidebar-container');
+    const sidebarBackdrop = document.getElementById('sidebar-backdrop');
+
+    function openMobileSidebar() {
+      sidebarContainer.classList.remove('-translate-x-full');
+      sidebarBackdrop.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileSidebar() {
+      sidebarContainer.classList.add('-translate-x-full');
+      sidebarBackdrop.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    if (mobileSidebarToggle) mobileSidebarToggle.addEventListener('click', openMobileSidebar);
+    if (closeSidebarBtn) closeSidebarBtn.addEventListener('click', closeMobileSidebar);
+    if (sidebarBackdrop) sidebarBackdrop.addEventListener('click', closeMobileSidebar);
+
+    // Toggle Balance Eye Icons
+    const toggleButtons = document.querySelectorAll('.toggle-balance-btn');
+    toggleButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-target');
+        const elem = document.getElementById(targetId);
+        if (!elem) return;
+
+        const isHidden = elem.getAttribute('data-hidden') === 'true';
+        if (isHidden) {
+          elem.innerText = elem.getAttribute('data-real');
+          elem.setAttribute('data-hidden', 'false');
+          btn.innerHTML = '<i class="ph-duotone ph-eye text-lg"></i>';
+        } else {
+          elem.innerText = '₹ ••••••';
+          elem.setAttribute('data-hidden', 'true');
+          btn.innerHTML = '<i class="ph-duotone ph-eye-slash text-lg"></i>';
+        }
+      });
+    });
+
+    // Keyboard shortcut CMD+K / CTRL+K for search
+    document.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        const searchInput = document.getElementById('search-input');
+        if (searchInput) searchInput.focus();
+      }
+    });
+
+    // Simple table search filter
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase();
+        const rows = document.querySelectorAll('tbody tr');
+        rows.forEach(row => {
+          const text = row.innerText.toLowerCase();
+          row.style.display = text.includes(query) ? '' : 'none';
+        });
+      });
+    }
+  </script>
+
+</body>
+</html>
