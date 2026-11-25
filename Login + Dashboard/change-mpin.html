@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartEdge - Change M-Pin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@400;500;600;700&family=Radio+Canada+Big:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="assets/js/smartedge-config.js"></script>
+  <style>
+    .material-symbols-outlined { font-family: 'Material Symbols Outlined'; font-weight: normal; font-style: normal; font-size: 20px; display: inline-block; width: 1em; height: 1em; line-height: 1 !important; white-space: nowrap; vertical-align: middle; }
+    .ambient-card-shadow { box-shadow: 0 8px 24px -6px rgba(16, 155, 77, 0.06), 0 2px 6px -1px rgba(23, 29, 23, 0.03); }
+    .active-nav-gradient { background: linear-gradient(90deg, #006B32 0%, #0D7A3E 100%); box-shadow: 0 6px 16px -4px rgba(0, 107, 50, 0.35); }
+    .hero-top-wash { background: radial-gradient(ellipse 65% 45% at 42% 0%, rgba(131, 251, 161, 0.22) 0%, rgba(245, 251, 241, 0) 70%); }
+  </style>
+</head>
+<body data-nav-group="setting" class="bg-light-surface text-light-on-surface font-body antialiased selection:bg-brand-mint-soft selection:text-light-primary">
+  <div class="min-h-screen flex flex-col lg:flex-row relative overflow-x-hidden hero-top-wash">
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-40 hidden lg:hidden"></div>
+    <aside id="smartedge-sidebar" class="fixed inset-y-0 left-0 z-50 w-[240px] xl:w-[252px] shrink-0 bg-light-surface-container-lowest/95 border-r border-light-outline-variant/40 flex flex-col justify-between transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out lg:sticky lg:top-0 lg:h-screen lg:z-30 overflow-hidden"></aside>
+
+    <div class="flex-1 flex flex-col min-w-0 justify-between">
+      <div id="smartedge-mobile-header"></div>
+
+      <div class="p-gutter-md lg:p-gutter-lg flex flex-col gap-gutter-md max-w-7xl w-full mx-auto flex-1">
+        <!-- Mobile Sub-navigation Tabs -->
+        <div class="lg:hidden grid grid-cols-3 gap-1 bg-light-surface-container-low p-1 rounded-md border border-light-outline-variant/40">
+          <a href="add-bank.html" class="py-1.5 px-1 rounded-sm text-light-on-surface-variant text-center"><span class="font-label text-label-sm">Add Bank</span></a>
+          <a href="change-password.html" class="py-1.5 px-1 rounded-sm text-light-on-surface-variant text-center"><span class="font-label text-label-sm">Password</span></a>
+          <a href="change-mpin.html" aria-current="page" class="py-1.5 px-1 rounded-sm bg-light-surface-container-lowest text-light-primary text-center shadow-sm"><span class="font-label text-label-sm">M-Pin</span></a>
+        </div>
+
+        <!-- Top Header Bar -->
+        <header class="flex flex-col md:flex-row md:items-center justify-between gap-gutter-md">
+          <div class="flex flex-col">
+            <h1 class="font-headline text-headline-md sm:text-headline-lg text-light-on-surface">Change M-Pin</h1>
+            <p class="font-body text-body-sm sm:text-body-md text-light-on-surface-variant">
+              Update your numeric transaction PIN used for authorizing payouts and transfers
+            </p>
+          </div>
+
+          <div class="hidden lg:flex flex-wrap items-center gap-gutter-sm">
+            <div class="inline-flex items-center gap-gutter-sm px-gutter-md py-1.5 rounded-full bg-light-surface-container-lowest border border-light-outline-variant/60 shadow-sm">
+              <span class="font-label text-label-sm text-light-on-surface-variant">Wallet:</span>
+              <span class="font-label text-label-md text-light-primary tabular-nums">₹ 0.00</span>
+              <span class="text-light-outline-variant">|</span>
+              <span class="font-label text-label-sm text-light-on-surface-variant">AEPS:</span>
+              <span class="font-label text-label-md text-info-blue tabular-nums">₹ 0.00</span>
+            </div>
+
+            <button type="button" class="inline-flex items-center gap-gutter-sm pl-1.5 pr-gutter-md py-1.5 rounded-full bg-light-surface-container-lowest border border-light-outline-variant/60 shadow-sm">
+              <span class="w-7 h-7 rounded-full bg-brand-green text-light-on-primary inline-flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined" style="font-size: 16px;" aria-hidden="true">storefront</span>
+              </span>
+              <span class="font-label text-label-md text-light-on-surface">(BIZR109) - Mehul Enterprises</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- Security Notice Banner -->
+        <div role="alert" class="rounded-md bg-warning-amber-soft border border-warning-amber/25 px-gutter-md py-2.5 flex items-center gap-gutter-sm">
+          <span class="material-symbols-outlined text-warning-amber shrink-0" style="font-size: 20px; font-variation-settings: 'FILL' 1;" aria-hidden="true">shield</span>
+          <p class="font-label text-label-sm sm:text-label-md text-warning-amber">
+            For your security, never share your OTP with anyone, including SmartEdge representatives.
+          </p>
+        </div>
+
+        <!-- Change M-Pin Card -->
+        <main>
+          <section class="bg-light-surface-container-lowest rounded-lg p-gutter-md sm:p-gutter-lg border border-light-outline-variant/40 ambient-card-shadow">
+            <form id="change-mpin-form" class="flex flex-col gap-gutter-lg max-w-2xl">
+              <div class="grid grid-cols-1 md:grid-cols-3 items-start md:items-center gap-gutter-xs md:gap-gutter-sm">
+                <label for="mp-current" class="font-label text-label-md text-light-on-surface">
+                  Current M-Pin <span class="text-refund-red">*</span>
+                </label>
+                <div class="md:col-span-2 relative flex items-center w-full">
+                  <span class="material-symbols-outlined text-light-primary absolute left-3 pointer-events-none" style="font-size: 18px;" aria-hidden="true">pin</span>
+                  <input id="mp-current" type="password" inputmode="numeric" maxlength="6" required placeholder="Current M-Pin" class="w-full rounded-md border border-light-outline-variant bg-light-surface-container-lowest pl-10 pr-10 py-2 text-body-md font-body text-light-on-surface tabular-nums focus:border-brand-green focus:ring-brand-green" />
+                  <button type="button" data-toggle-vis="mp-current" class="absolute right-3 text-light-on-surface-variant hover:text-light-primary" aria-label="Toggle M-Pin visibility">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">visibility</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-3 items-start md:items-center gap-gutter-xs md:gap-gutter-sm">
+                <label for="mp-new" class="font-label text-label-md text-light-on-surface">
+                  New M-Pin <span class="text-refund-red">*</span>
+                </label>
+                <div class="md:col-span-2 relative flex items-center w-full">
+                  <span class="material-symbols-outlined text-light-primary absolute left-3 pointer-events-none" style="font-size: 18px;" aria-hidden="true">dialpad</span>
+                  <input id="mp-new" type="password" inputmode="numeric" maxlength="6" required placeholder="New M-Pin (4-6 digits)" class="w-full rounded-md border border-light-outline-variant bg-light-surface-container-lowest pl-10 pr-10 py-2 text-body-md font-body text-light-on-surface tabular-nums focus:border-brand-green focus:ring-brand-green" />
+                  <button type="button" data-toggle-vis="mp-new" class="absolute right-3 text-light-on-surface-variant hover:text-light-primary" aria-label="Toggle M-Pin visibility">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">visibility</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-3 items-start md:items-center gap-gutter-xs md:gap-gutter-sm">
+                <label for="mp-confirm" class="font-label text-label-md text-light-on-surface">
+                  Re-Enter M-Pin <span class="text-refund-red">*</span>
+                </label>
+                <div class="md:col-span-2 relative flex items-center w-full">
+                  <span class="material-symbols-outlined text-light-primary absolute left-3 pointer-events-none" style="font-size: 18px;" aria-hidden="true">verified_user</span>
+                  <input id="mp-confirm" type="password" inputmode="numeric" maxlength="6" required placeholder="Re-Enter M-Pin" class="w-full rounded-md border border-light-outline-variant bg-light-surface-container-lowest pl-10 pr-10 py-2 text-body-md font-body text-light-on-surface tabular-nums focus:border-brand-green focus:ring-brand-green" />
+                  <button type="button" data-toggle-vis="mp-confirm" class="absolute right-3 text-light-on-surface-variant hover:text-light-primary" aria-label="Toggle M-Pin visibility">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">visibility</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-end pt-gutter-md border-t border-light-outline-variant/30">
+                <button type="submit" class="w-full sm:w-auto inline-flex items-center justify-center gap-gutter-xs px-gutter-xl py-2.5 rounded-md bg-light-primary text-light-on-primary hover:bg-brand-green-deep transition-colors shadow-sm font-label text-label-lg">
+                  <span class="material-symbols-outlined" style="font-size: 18px;" aria-hidden="true">pin</span>
+                  <span>Change M-Pin</span>
+                </button>
+              </div>
+            </form>
+          </section>
+        </main>
+      </div>
+
+      <div id="smartedge-footer"></div>
+      <div id="smartedge-mobile-bottom-nav"></div>
+    </div>
+  </div>
+  <script src="assets/js/smartedge-shell.js"></script>
+  <script>
+    document.querySelectorAll('[data-toggle-vis]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const input = document.getElementById(btn.getAttribute('data-toggle-vis'));
+        if (!input) return;
+        const isPwd = input.type === 'password';
+        input.type = isPwd ? 'text' : 'password';
+        btn.querySelector('.material-symbols-outlined').textContent = isPwd ? 'visibility_off' : 'visibility';
+      });
+    });
+
+    const mpForm = document.getElementById('change-mpin-form');
+    if (mpForm) {
+      mpForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const newPin = document.getElementById('mp-new').value;
+        const confirmPin = document.getElementById('mp-confirm').value;
+        if (!/^\d{4,6}$/.test(newPin)) {
+          window.SmartEdgeShell.showToast('M-Pin must be 4 to 6 numeric digits.', 'error');
+          return;
+        }
+        if (newPin !== confirmPin) {
+          window.SmartEdgeShell.showToast('New M-Pin and confirmation do not match.', 'error');
+          return;
+        }
+        mpForm.reset();
+        window.SmartEdgeShell.showToast('M-Pin updated successfully!');
+      });
+    }
+  </script>
+</body>
+</html>

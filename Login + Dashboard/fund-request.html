@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartEdge - Add New Fund Request</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@400;500;600;700&family=Radio+Canada+Big:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="assets/js/smartedge-config.js"></script>
+  <style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      line-height: 1 !important;
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+    .ambient-card-shadow {
+      box-shadow: 0 8px 24px -6px rgba(16, 155, 77, 0.06), 0 2px 6px -1px rgba(23, 29, 23, 0.03);
+    }
+    .active-nav-gradient {
+      background: linear-gradient(90deg, #006B32 0%, #0D7A3E 100%);
+      box-shadow: 0 6px 16px -4px rgba(0, 107, 50, 0.35);
+    }
+    .hero-top-wash {
+      background: radial-gradient(ellipse 65% 45% at 42% 0%, rgba(131, 251, 161, 0.22) 0%, rgba(245, 251, 241, 0) 70%);
+    }
+  </style>
+</head>
+<body data-nav-group="fund-request" class="bg-light-surface text-light-on-surface font-body antialiased selection:bg-brand-mint-soft selection:text-light-primary">
+  <div class="min-h-screen flex flex-col lg:flex-row relative overflow-x-hidden hero-top-wash">
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-40 hidden lg:hidden"></div>
+    <aside id="smartedge-sidebar" class="fixed inset-y-0 left-0 z-50 w-[240px] xl:w-[252px] shrink-0 bg-light-surface-container-lowest/95 border-r border-light-outline-variant/40 flex flex-col justify-between transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out lg:sticky lg:top-0 lg:h-screen lg:z-30 overflow-hidden"></aside>
+
+    <div class="flex-1 flex flex-col min-w-0 justify-between">
+      <div id="smartedge-mobile-header"></div>
+
+      <div class="p-gutter-md lg:p-gutter-lg flex flex-col gap-gutter-md max-w-7xl w-full mx-auto flex-1">
+        <!-- Mobile Sub-navigation Tabs -->
+        <div class="lg:hidden grid grid-cols-3 gap-1 bg-light-surface-container-low p-1 rounded-md border border-light-outline-variant/40">
+          <a href="fund-request.html" aria-current="page" class="py-1.5 px-2 rounded-sm bg-light-surface-container-lowest text-light-primary text-center shadow-sm">
+            <span class="font-label text-label-sm">Add Request</span>
+          </a>
+          <a href="fund-request-reports.html" class="py-1.5 px-2 rounded-sm text-light-on-surface-variant text-center">
+            <span class="font-label text-label-sm">Reports</span>
+          </a>
+          <a href="pending-upi-collect.html" class="py-1.5 px-2 rounded-sm text-light-on-surface-variant text-center">
+            <span class="font-label text-label-sm">UPI Collect</span>
+          </a>
+        </div>
+
+        <!-- Top Header Bar -->
+        <header class="flex flex-col md:flex-row md:items-center justify-between gap-gutter-md">
+          <div class="flex flex-col">
+            <h1 class="font-headline text-headline-md sm:text-headline-lg text-light-on-surface">Add New Request</h1>
+            <p class="font-body text-body-sm sm:text-body-md text-light-on-surface-variant">
+              Submit a wallet load deposit request with slip verification
+            </p>
+          </div>
+
+          <div class="hidden lg:flex flex-wrap items-center gap-gutter-sm">
+            <div class="inline-flex items-center gap-gutter-sm px-gutter-md py-1.5 rounded-full bg-light-surface-container-lowest border border-light-outline-variant/60 shadow-sm">
+              <span class="font-label text-label-sm text-light-on-surface-variant">Wallet:</span>
+              <span class="font-label text-label-md text-light-primary tabular-nums">₹ 0.00</span>
+              <span class="text-light-outline-variant">|</span>
+              <span class="font-label text-label-sm text-light-on-surface-variant">AEPS:</span>
+              <span class="font-label text-label-md text-info-blue tabular-nums">₹ 0.00</span>
+            </div>
+
+            <button type="button" class="inline-flex items-center gap-gutter-sm pl-1.5 pr-gutter-md py-1.5 rounded-full bg-light-surface-container-lowest border border-light-outline-variant/60 shadow-sm">
+              <span class="w-7 h-7 rounded-full bg-brand-green text-light-on-primary inline-flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined" style="font-size: 16px;" aria-hidden="true">storefront</span>
+              </span>
+              <span class="font-label text-label-md text-light-on-surface">(BIZR109) - Mehul Enterprises</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- Security Notice Banner -->
+        <div role="alert" class="rounded-md bg-warning-amber-soft border border-warning-amber/25 px-gutter-md py-2.5 flex items-center gap-gutter-sm">
+          <span class="material-symbols-outlined text-warning-amber shrink-0" style="font-size: 20px; font-variation-settings: 'FILL' 1;" aria-hidden="true">shield</span>
+          <p class="font-label text-label-sm sm:text-label-md text-warning-amber">
+            For your security, never share your OTP with anyone, including SmartEdge representatives.
+          </p>
+        </div>
+
+        <!-- Fund Request Form Card -->
+        <main>
+          <section class="bg-light-surface-container-lowest rounded-lg p-gutter-md sm:p-gutter-lg border border-light-outline-variant/40 ambient-card-shadow flex flex-col gap-gutter-lg">
+            <div role="alert" class="rounded-md bg-refund-red-soft border border-refund-red/20 px-gutter-md py-3 flex items-start gap-gutter-sm">
+              <span class="material-symbols-outlined text-refund-red shrink-0 mt-0.5" style="font-size: 20px; font-variation-settings: 'FILL' 1;" aria-hidden="true">warning</span>
+              <p class="font-label text-label-sm sm:text-label-md text-refund-red leading-relaxed">
+                Important Notice: We do not accept online fund transfers in any of our accounts. If anyone transfers funds online, cashin will not be done in any circumstances.
+              </p>
+            </div>
+
+            <form data-smartedge-form data-success-msg="Fund request submitted for verification!" class="grid grid-cols-1 md:grid-cols-2 gap-x-gutter-lg gap-y-gutter-md">
+              <!-- Transaction Mode -->
+              <div class="flex flex-col gap-gutter-xs">
+                <label class="font-label text-label-md text-light-on-surface">Transaction Mode</label>
+                <div class="grid grid-cols-3 gap-gutter-xs sm:gap-gutter-sm" id="tx-mode-group">
+                  <label class="tx-mode-pill flex items-center justify-center gap-1.5 px-2 sm:px-3 py-2.5 rounded-md border border-brand-green bg-brand-mint-soft text-light-primary cursor-pointer transition-colors">
+                    <input type="radio" name="txMode" value="cash" checked class="sr-only" />
+                    <span class="font-label text-label-sm sm:text-label-md">Cash Deposit</span>
+                  </label>
+                  <label class="tx-mode-pill flex items-center justify-center gap-1.5 px-2 sm:px-3 py-2.5 rounded-md border border-light-outline-variant bg-light-surface-container-lowest text-light-on-surface cursor-pointer hover:bg-light-surface-container-low transition-colors">
+                    <input type="radio" name="txMode" value="transfer" class="sr-only" />
+                    <span class="font-label text-label-sm sm:text-label-md">Transfer</span>
+                  </label>
+                  <label class="tx-mode-pill flex items-center justify-center gap-1.5 px-2 sm:px-3 py-2.5 rounded-md border border-light-outline-variant bg-light-surface-container-lowest text-light-on-surface cursor-pointer hover:bg-light-surface-container-low transition-colors">
+                    <input type="radio" name="txMode" value="upi" class="sr-only" />
+                    <span class="font-label text-label-sm sm:text-label-md">UPI</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Wallet Type -->
+              <div class="flex flex-col gap-gutter-xs">
+                <label for="wallet-type" class="font-label text-label-md text-light-on-surface">Wallet Type</label>
+                <select id="wallet-type" class="w-full rounded-md border border-light-outline-variant bg-light-surface-container-lowest px-3 py-2.5 text-body-md font-body text-light-on-surface focus:border-brand-green focus:ring-brand-green">
+                  <option selected>Main Wallet</option>
+                  <option>AEPS Wallet</option>
+                </select>
+              </div>
+
+              <!-- Transaction Date -->
+              <div class="flex flex-col gap-gutter-xs">
+                <label for="tx-date" class="font-label text-label-md text-light-on-surface">Transaction Date</label>
+                <div class="relative flex items-center">
+                  <span class="material-symbols-outlined text-light-primary absolute left-3 pointer-events-none" style="font-size: 18px;" aria-hidden="true">calendar_today</span>
+                  <input id="tx-date" type="date" value="2026-11-26" class="w-full rounded-md border border-light-outline-variant bg-light-surface-container-lowest pl-10 pr-3 py-2.5 text-body-md font-body text-light-on-surface focus:border-brand-green focus:ring-brand-green" />
+                </div>
+              </div>
+
+              <!-- Charges -->
+              <div class="flex flex-col gap-gutter-xs">
+                <label for="charges" class="font-label text-label-md text-light-on-surface">Charges</label>
+                <div class="relative flex items-center">
+                  <span class="absolute left-3 font-label text-label-lg text-light-on-surface-variant">₹</span>
+                  <input id="charges" type="text" value="0.00" readonly class="w-full rounded-md border border-light-outline-variant/60 bg-light-surface-container-low pl-8 pr-3 py-2.5 text-body-md font-body text-light-on-surface-variant tabular-nums" />
+                </div>
+              </div>
+
+              <!-- Request Amount -->
+              <div class="flex flex-col gap-gutter-xs">
+                <label for="req-amount" class="font-label text-label-md text-light-on-surface">Request Amount</label>
+                <div class="relative flex items-center">
+                  <span class="absolute left-3 font-label text-label-lg text-light-primary">₹</span>
+                  <input id="req-amount" type="number" min="1" placeholder="Enter amount" required class="w-full rounded-md border border-light-outline-variant bg-light-surface-container-lowest pl-8 pr-3 py-2.5 text-body-md font-body text-light-on-surface tabular-nums focus:border-brand-green focus:ring-brand-green" />
+                </div>
+                <span id="amount-in-words" class="font-body text-body-sm text-light-on-surface-variant">Inwords: Zero Rupees Only</span>
+              </div>
+
+              <!-- Deposit Bank -->
+              <div class="flex flex-col gap-gutter-xs">
+                <label for="deposit-bank" class="font-label text-label-md text-light-on-surface">Deposit Bank</label>
+                <div class="relative flex items-center">
+                  <span class="material-symbols-outlined text-light-primary absolute left-3 pointer-events-none" style="font-size: 18px;" aria-hidden="true">account_balance</span>
+                  <select id="deposit-bank" class="w-full rounded-md border border-light-outline-variant bg-light-surface-container-lowest pl-10 pr-3 py-2.5 text-body-md font-body text-light-on-surface focus:border-brand-green focus:ring-brand-green">
+                    <option selected>Select Admin Bank</option>
+                    <option>State Bank of India - Collection A/C</option>
+                    <option>HDFC Bank - Nodal A/C</option>
+                    <option>ICICI Bank - Settlement A/C</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Mobile No -->
+              <div class="flex flex-col gap-gutter-xs">
+                <label for="mobile-no" class="font-label text-label-md text-light-on-surface">Mobile No</label>
+                <div class="relative flex items-center">
+                  <span class="material-symbols-outlined text-light-primary absolute left-3 pointer-events-none" style="font-size: 18px;" aria-hidden="true">smartphone</span>
+                  <input id="mobile-no" type="tel" maxlength="10" placeholder="Enter 10-digit mobile number" class="w-full rounded-md border border-light-outline-variant bg-light-surface-container-lowest pl-10 pr-3 py-2.5 text-body-md font-body text-light-on-surface tabular-nums focus:border-brand-green focus:ring-brand-green" />
+                </div>
+              </div>
+
+              <!-- Transaction ID -->
+              <div class="flex flex-col gap-gutter-xs">
+                <label for="tx-id" class="font-label text-label-md text-light-on-surface">Transaction ID</label>
+                <div class="relative flex items-center">
+                  <span class="material-symbols-outlined text-light-primary absolute left-3 pointer-events-none" style="font-size: 18px;" aria-hidden="true">tag</span>
+                  <input id="tx-id" type="text" placeholder="Enter bank reference / UTR ID" class="w-full rounded-md border border-light-outline-variant bg-light-surface-container-lowest pl-10 pr-3 py-2.5 text-body-md font-mono text-light-on-surface focus:border-brand-green focus:ring-brand-green" />
+                </div>
+              </div>
+
+              <!-- Upload Slip -->
+              <div class="flex flex-col gap-gutter-xs">
+                <label for="upload-slip" class="font-label text-label-md text-light-on-surface">Upload Slip</label>
+                <label for="upload-slip" class="flex items-center justify-between rounded-md border border-dashed border-brand-green/50 bg-brand-mint-soft/40 px-gutter-md py-3 cursor-pointer hover:bg-brand-mint-soft/70 transition-colors">
+                  <span class="flex items-center gap-gutter-sm min-w-0">
+                    <span class="material-symbols-outlined text-light-primary shrink-0" style="font-size: 20px;" aria-hidden="true">upload_file</span>
+                    <span id="slip-filename" class="font-body text-body-sm text-light-on-surface truncate">Choose deposit receipt image or PDF</span>
+                  </span>
+                  <span class="font-label text-label-sm px-2.5 py-1 rounded-sm bg-light-surface-container-lowest border border-light-outline-variant text-light-primary shrink-0">Browse</span>
+                  <input id="upload-slip" type="file" accept="image/*,.pdf" class="sr-only" />
+                </label>
+              </div>
+
+              <!-- Remark -->
+              <div class="flex flex-col gap-gutter-xs">
+                <label for="remark" class="font-label text-label-md text-light-on-surface">Remark</label>
+                <textarea id="remark" rows="2" placeholder="Add branch name or deposit note..." class="w-full rounded-md border border-light-outline-variant bg-light-surface-container-lowest px-3 py-2 text-body-md font-body text-light-on-surface focus:border-brand-green focus:ring-brand-green"></textarea>
+              </div>
+
+              <!-- Form Actions -->
+              <div class="md:col-span-2 pt-gutter-sm flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-gutter-sm border-t border-light-outline-variant/30">
+                <button type="reset" class="px-gutter-lg py-2.5 rounded-md border border-light-outline-variant bg-light-surface-container-lowest text-light-on-surface hover:bg-light-surface-container-low transition-colors font-label text-label-lg">
+                  Reset Form
+                </button>
+                <button type="submit" class="inline-flex items-center justify-center gap-gutter-sm px-gutter-xl py-2.5 rounded-md bg-light-primary text-light-on-primary hover:bg-brand-green-deep transition-colors shadow-sm font-label text-label-lg">
+                  <span class="material-symbols-outlined" style="font-size: 18px;" aria-hidden="true">check_circle</span>
+                  <span>Submit Fund Request</span>
+                </button>
+              </div>
+            </form>
+          </section>
+        </main>
+      </div>
+
+      <div id="smartedge-footer"></div>
+      <div id="smartedge-mobile-bottom-nav"></div>
+    </div>
+  </div>
+
+  <script src="assets/js/smartedge-shell.js"></script>
+  <script>
+    // Transaction mode pill active state
+    document.querySelectorAll('#tx-mode-group input[type="radio"]').forEach((radio) => {
+      radio.addEventListener('change', () => {
+        document.querySelectorAll('#tx-mode-group .tx-mode-pill').forEach((pill) => {
+          pill.classList.remove('border-brand-green', 'bg-brand-mint-soft', 'text-light-primary');
+          pill.classList.add('border-light-outline-variant', 'bg-light-surface-container-lowest', 'text-light-on-surface');
+        });
+        const activePill = radio.closest('.tx-mode-pill');
+        activePill.classList.remove('border-light-outline-variant', 'bg-light-surface-container-lowest', 'text-light-on-surface');
+        activePill.classList.add('border-brand-green', 'bg-brand-mint-soft', 'text-light-primary');
+      });
+    });
+
+    // File name display
+    const slipInput = document.getElementById('upload-slip');
+    const slipLabel = document.getElementById('slip-filename');
+    if (slipInput && slipLabel) {
+      slipInput.addEventListener('change', () => {
+        slipLabel.textContent = slipInput.files?.[0]?.name || 'Choose deposit receipt image or PDF';
+      });
+    }
+
+    // Simple Indian Rupees in-words converter
+    function numberToIndianWords(num) {
+      if (!num || num <= 0) return 'Zero';
+      const ones = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten',
+        'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen'];
+      const tens = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
+      const twoDigits = (n) => (n < 20 ? ones[n] : tens[Math.floor(n / 10)] + (n % 10 ? ' ' + ones[n % 10] : ''));
+      const threeDigits = (n) => (n >= 100 ? ones[Math.floor(n / 100)] + ' Hundred' + (n % 100 ? ' ' + twoDigits(n % 100) : '') : twoDigits(n));
+      let n = Math.floor(num);
+      if (n > 99999999) return n.toLocaleString('en-IN');
+      const crore = Math.floor(n / 10000000); n %= 10000000;
+      const lakh = Math.floor(n / 100000); n %= 100000;
+      const thousand = Math.floor(n / 1000); n %= 1000;
+      const parts = [];
+      if (crore) parts.push(twoDigits(crore) + ' Crore');
+      if (lakh) parts.push(twoDigits(lakh) + ' Lakh');
+      if (thousand) parts.push(twoDigits(thousand) + ' Thousand');
+      if (n) parts.push(threeDigits(n));
+      return parts.join(' ').trim();
+    }
+
+    const reqAmountInput = document.getElementById('req-amount');
+    const amountWordsEl = document.getElementById('amount-in-words');
+    if (reqAmountInput && amountWordsEl) {
+      reqAmountInput.addEventListener('input', () => {
+        const val = parseFloat(reqAmountInput.value);
+        amountWordsEl.textContent = 'Inwords: ' + (isNaN(val) || val <= 0 ? 'Zero' : numberToIndianWords(val)) + ' Rupees Only';
+      });
+    }
+  </script>
+</body>
+</html>

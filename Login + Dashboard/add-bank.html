@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartEdge - Add Bank</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@400;500;600;700&family=Radio+Canada+Big:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="assets/js/smartedge-config.js"></script>
+  <style>
+    .material-symbols-outlined { font-family: 'Material Symbols Outlined'; font-weight: normal; font-style: normal; font-size: 20px; display: inline-block; width: 1em; height: 1em; line-height: 1 !important; white-space: nowrap; vertical-align: middle; }
+    .ambient-card-shadow { box-shadow: 0 8px 24px -6px rgba(16, 155, 77, 0.06), 0 2px 6px -1px rgba(23, 29, 23, 0.03); }
+    .active-nav-gradient { background: linear-gradient(90deg, #006B32 0%, #0D7A3E 100%); box-shadow: 0 6px 16px -4px rgba(0, 107, 50, 0.35); }
+    .hero-top-wash { background: radial-gradient(ellipse 65% 45% at 42% 0%, rgba(131, 251, 161, 0.22) 0%, rgba(245, 251, 241, 0) 70%); }
+  </style>
+</head>
+<body data-nav-group="setting" class="bg-light-surface text-light-on-surface font-body antialiased selection:bg-brand-mint-soft selection:text-light-primary">
+  <div class="min-h-screen flex flex-col lg:flex-row relative overflow-x-hidden hero-top-wash">
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-40 hidden lg:hidden"></div>
+    <aside id="smartedge-sidebar" class="fixed inset-y-0 left-0 z-50 w-[240px] xl:w-[252px] shrink-0 bg-light-surface-container-lowest/95 border-r border-light-outline-variant/40 flex flex-col justify-between transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out lg:sticky lg:top-0 lg:h-screen lg:z-30 overflow-hidden"></aside>
+
+    <div class="flex-1 flex flex-col min-w-0 justify-between">
+      <div id="smartedge-mobile-header"></div>
+
+      <div class="p-gutter-md lg:p-gutter-lg flex flex-col gap-gutter-md max-w-7xl w-full mx-auto flex-1">
+        <!-- Mobile Sub-navigation Tabs -->
+        <div class="lg:hidden grid grid-cols-3 gap-1 bg-light-surface-container-low p-1 rounded-md border border-light-outline-variant/40">
+          <a href="add-bank.html" aria-current="page" class="py-1.5 px-1 rounded-sm bg-light-surface-container-lowest text-light-primary text-center shadow-sm"><span class="font-label text-label-sm">Add Bank</span></a>
+          <a href="change-password.html" class="py-1.5 px-1 rounded-sm text-light-on-surface-variant text-center"><span class="font-label text-label-sm">Password</span></a>
+          <a href="change-mpin.html" class="py-1.5 px-1 rounded-sm text-light-on-surface-variant text-center"><span class="font-label text-label-sm">M-Pin</span></a>
+        </div>
+
+        <!-- Top Header Bar -->
+        <header class="flex flex-col md:flex-row md:items-center justify-between gap-gutter-md">
+          <div class="flex flex-col">
+            <h1 class="font-headline text-headline-md sm:text-headline-lg text-light-on-surface">Add Bank</h1>
+            <p class="font-body text-body-sm sm:text-body-md text-light-on-surface-variant">
+              Register and manage settlement bank accounts for payout transfers
+            </p>
+          </div>
+
+          <div class="hidden lg:flex flex-wrap items-center gap-gutter-sm">
+            <div class="inline-flex items-center gap-gutter-sm px-gutter-md py-1.5 rounded-full bg-light-surface-container-lowest border border-light-outline-variant/60 shadow-sm">
+              <span class="font-label text-label-sm text-light-on-surface-variant">Wallet:</span>
+              <span class="font-label text-label-md text-light-primary tabular-nums">₹ 0.00</span>
+              <span class="text-light-outline-variant">|</span>
+              <span class="font-label text-label-sm text-light-on-surface-variant">AEPS:</span>
+              <span class="font-label text-label-md text-info-blue tabular-nums">₹ 0.00</span>
+            </div>
+
+            <button type="button" class="inline-flex items-center gap-gutter-sm pl-1.5 pr-gutter-md py-1.5 rounded-full bg-light-surface-container-lowest border border-light-outline-variant/60 shadow-sm">
+              <span class="w-7 h-7 rounded-full bg-brand-green text-light-on-primary inline-flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined" style="font-size: 16px;" aria-hidden="true">storefront</span>
+              </span>
+              <span class="font-label text-label-md text-light-on-surface">(BIZR109) - Mehul Enterprises</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- Security Notice Banner -->
+        <div role="alert" class="rounded-md bg-warning-amber-soft border border-warning-amber/25 px-gutter-md py-2.5 flex items-center gap-gutter-sm">
+          <span class="material-symbols-outlined text-warning-amber shrink-0" style="font-size: 20px; font-variation-settings: 'FILL' 1;" aria-hidden="true">shield</span>
+          <p class="font-label text-label-sm sm:text-label-md text-warning-amber">
+            For your security, never share your OTP with anyone, including SmartEdge representatives.
+          </p>
+        </div>
+
+        <!-- Add Bank Card -->
+        <main>
+          <section class="bg-light-surface-container-lowest rounded-lg p-gutter-md sm:p-gutter-lg border border-light-outline-variant/40 ambient-card-shadow flex flex-col gap-gutter-lg">
+            <form id="add-bank-form" class="flex flex-col gap-gutter-md pb-gutter-md border-b border-light-outline-variant/30">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter-md">
+                <div class="flex flex-col gap-gutter-xs">
+                  <label for="ab-bank" class="font-label text-label-md text-light-on-surface">Bank Name <span class="text-refund-red">*</span></label>
+                  <div class="relative flex items-center">
+                    <span class="material-symbols-outlined text-light-primary absolute left-3 pointer-events-none" style="font-size: 18px;" aria-hidden="true">account_balance</span>
+                    <input id="ab-bank" type="text" required placeholder="Bank Name" class="w-full rounded-md border border-light-outline-variant bg-light-surface-container-lowest pl-10 pr-3 py-2 text-body-md font-body text-light-on-surface focus:border-brand-green focus:ring-brand-green" />
+                  </div>
+                </div>
+
+                <div class="flex flex-col gap-gutter-xs">
+                  <label for="ab-account" class="font-label text-label-md text-light-on-surface">Account No <span class="text-refund-red">*</span></label>
+                  <div class="relative flex items-center">
+                    <span class="material-symbols-outlined text-light-primary absolute left-3 pointer-events-none" style="font-size: 18px;" aria-hidden="true">credit_card</span>
+                    <input id="ab-account" type="text" inputmode="numeric" required placeholder="Enter Account No" class="w-full rounded-md border border-light-outline-variant bg-light-surface-container-lowest pl-10 pr-3 py-2 text-body-md font-body text-light-on-surface tabular-nums focus:border-brand-green focus:ring-brand-green" />
+                  </div>
+                </div>
+
+                <div class="flex flex-col gap-gutter-xs">
+                  <label for="ab-ifsc" class="font-label text-label-md text-light-on-surface">IFSC <span class="text-refund-red">*</span></label>
+                  <div class="relative flex items-center">
+                    <span class="material-symbols-outlined text-light-primary absolute left-3 pointer-events-none" style="font-size: 18px;" aria-hidden="true">tag</span>
+                    <input id="ab-ifsc" type="text" required placeholder="Enter IFSC Code" class="w-full rounded-md border border-light-outline-variant bg-light-surface-container-lowest pl-10 pr-3 py-2 text-body-md font-mono text-light-on-surface uppercase focus:border-brand-green focus:ring-brand-green" />
+                  </div>
+                </div>
+
+                <div class="flex flex-col gap-gutter-xs">
+                  <label for="ab-branch" class="font-label text-label-md text-light-on-surface">Branch Address</label>
+                  <div class="relative flex items-start">
+                    <span class="material-symbols-outlined text-light-primary absolute left-3 top-2.5 pointer-events-none" style="font-size: 18px;" aria-hidden="true">location_on</span>
+                    <textarea id="ab-branch" rows="2" placeholder="Enter Branch Address" class="w-full rounded-md border border-light-outline-variant bg-light-surface-container-lowest pl-10 pr-3 py-2 text-body-md font-body text-light-on-surface focus:border-brand-green focus:ring-brand-green"></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-gutter-sm pt-2">
+                <button type="reset" class="inline-flex items-center justify-center gap-gutter-xs px-gutter-md py-2 rounded-md bg-light-surface-container-low text-light-on-surface border border-light-outline-variant hover:bg-light-surface-container transition-colors font-label text-label-md">
+                  <span class="material-symbols-outlined" style="font-size: 18px;" aria-hidden="true">refresh</span>
+                  <span>Clear</span>
+                </button>
+
+                <button type="submit" class="inline-flex items-center justify-center gap-gutter-xs px-gutter-xl py-2 rounded-md bg-light-primary text-light-on-primary hover:bg-brand-green-deep transition-colors shadow-sm font-label text-label-lg">
+                  <span class="material-symbols-outlined" style="font-size: 18px;" aria-hidden="true">save</span>
+                  <span>Save</span>
+                </button>
+              </div>
+            </form>
+
+            <div class="w-full overflow-x-auto rounded-md border border-light-outline-variant/40">
+              <table class="w-full min-w-max text-left border-collapse">
+                <thead>
+                  <tr class="border-b border-light-outline-variant/40 bg-light-surface-container-low/80">
+                    <th scope="col" class="py-2.5 px-3 font-label text-label-sm text-light-on-surface-variant">ID</th>
+                    <th scope="col" class="py-2.5 px-3 font-label text-label-sm text-light-on-surface-variant">Bank Name</th>
+                    <th scope="col" class="py-2.5 px-3 font-label text-label-sm text-light-on-surface-variant">Account No</th>
+                    <th scope="col" class="py-2.5 px-3 font-label text-label-sm text-light-on-surface-variant">IFSC Code</th>
+                    <th scope="col" class="py-2.5 px-3 font-label text-label-sm text-light-on-surface-variant">Branch Address</th>
+                    <th scope="col" class="py-2.5 px-3 font-label text-label-sm text-light-on-surface-variant">Edit</th>
+                    <th scope="col" class="py-2.5 px-3 font-label text-label-sm text-light-on-surface-variant">Delete</th>
+                  </tr>
+                </thead>
+                <tbody id="bank-table-body">
+                  <tr id="bank-empty-row">
+                    <td colspan="7" class="py-12 text-center px-4">
+                      <div class="flex flex-col items-center justify-center gap-gutter-sm max-w-sm mx-auto">
+                        <span class="w-12 h-12 rounded-full bg-brand-mint-soft text-light-primary inline-flex items-center justify-center">
+                          <span class="material-symbols-outlined" style="font-size: 24px;" aria-hidden="true">account_balance</span>
+                        </span>
+                        <p class="font-title text-title-md text-light-on-surface">No bank accounts added</p>
+                        <p class="font-body text-body-sm text-light-on-surface-variant">
+                          Add a settlement bank account above to manage your payout destinations.
+                        </p>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </main>
+      </div>
+
+      <div id="smartedge-footer"></div>
+      <div id="smartedge-mobile-bottom-nav"></div>
+    </div>
+  </div>
+  <script src="assets/js/smartedge-shell.js"></script>
+  <script>
+    const bankForm = document.getElementById('add-bank-form');
+    const bankTbody = document.getElementById('bank-table-body');
+    const emptyRow = document.getElementById('bank-empty-row');
+    let bankSeq = 1;
+
+    if (bankForm && bankTbody) {
+      bankForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const bankName = document.getElementById('ab-bank').value.trim();
+        const accountNo = document.getElementById('ab-account').value.trim();
+        const ifsc = document.getElementById('ab-ifsc').value.trim().toUpperCase();
+        const branch = document.getElementById('ab-branch').value.trim() || '-';
+
+        if (!bankName || !accountNo || !ifsc) return;
+
+        if (emptyRow) emptyRow.classList.add('hidden');
+        const tr = document.createElement('tr');
+        tr.className = 'border-b border-light-outline-variant/25 hover:bg-light-surface-container-low/50';
+        tr.innerHTML = `
+          <td class="py-2.5 px-3 font-mono text-mono-sm text-light-on-surface">#${bankSeq++}</td>
+          <td class="py-2.5 px-3 font-label text-label-md text-light-on-surface">${bankName}</td>
+          <td class="py-2.5 px-3 font-mono text-mono-sm text-light-on-surface tabular-nums">${accountNo}</td>
+          <td class="py-2.5 px-3 font-mono text-mono-sm text-light-primary">${ifsc}</td>
+          <td class="py-2.5 px-3 font-body text-body-sm text-light-on-surface-variant">${branch}</td>
+          <td class="py-2.5 px-3">
+            <button type="button" class="text-info-blue hover:underline font-label text-label-sm edit-bank-btn">Edit</button>
+          </td>
+          <td class="py-2.5 px-3">
+            <button type="button" class="text-refund-red hover:underline font-label text-label-sm delete-bank-btn">Delete</button>
+          </td>
+        `;
+        tr.querySelector('.delete-bank-btn').addEventListener('click', () => {
+          tr.remove();
+          if (bankTbody.querySelectorAll('tr:not(#bank-empty-row)').length === 0 && emptyRow) {
+            emptyRow.classList.remove('hidden');
+          }
+          window.SmartEdgeShell.showToast('Bank account removed.');
+        });
+        tr.querySelector('.edit-bank-btn').addEventListener('click', () => {
+          document.getElementById('ab-bank').value = bankName;
+          document.getElementById('ab-account').value = accountNo;
+          document.getElementById('ab-ifsc').value = ifsc;
+          document.getElementById('ab-branch').value = branch === '-' ? '' : branch;
+          tr.remove();
+          if (bankTbody.querySelectorAll('tr:not(#bank-empty-row)').length === 0 && emptyRow) {
+            emptyRow.classList.remove('hidden');
+          }
+        });
+        bankTbody.appendChild(tr);
+        bankForm.reset();
+        window.SmartEdgeShell.showToast('Settlement bank account saved!');
+      });
+    }
+  </script>
+</body>
+</html>

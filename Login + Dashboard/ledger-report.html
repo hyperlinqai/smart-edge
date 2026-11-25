@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartEdge - Ledger Report</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@400;500;600;700&family=Radio+Canada+Big:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="assets/js/smartedge-config.js"></script>
+  <style>
+    .material-symbols-outlined { font-family: 'Material Symbols Outlined'; font-weight: normal; font-style: normal; font-size: 20px; display: inline-block; width: 1em; height: 1em; line-height: 1 !important; white-space: nowrap; vertical-align: middle; }
+    .ambient-card-shadow { box-shadow: 0 8px 24px -6px rgba(16, 155, 77, 0.06), 0 2px 6px -1px rgba(23, 29, 23, 0.03); }
+    .active-nav-gradient { background: linear-gradient(90deg, #006B32 0%, #0D7A3E 100%); box-shadow: 0 6px 16px -4px rgba(0, 107, 50, 0.35); }
+    .hero-top-wash { background: radial-gradient(ellipse 65% 45% at 42% 0%, rgba(131, 251, 161, 0.22) 0%, rgba(245, 251, 241, 0) 70%); }
+  </style>
+</head>
+<body data-nav-group="reports" class="bg-light-surface text-light-on-surface font-body antialiased selection:bg-brand-mint-soft selection:text-light-primary">
+  <div class="min-h-screen flex flex-col lg:flex-row relative overflow-x-hidden hero-top-wash">
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-40 hidden lg:hidden"></div>
+    <aside id="smartedge-sidebar" class="fixed inset-y-0 left-0 z-50 w-[240px] xl:w-[252px] shrink-0 bg-light-surface-container-lowest/95 border-r border-light-outline-variant/40 flex flex-col justify-between transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out lg:sticky lg:top-0 lg:h-screen lg:z-30 overflow-hidden"></aside>
+
+    <div class="flex-1 flex flex-col min-w-0 justify-between">
+      <div id="smartedge-mobile-header"></div>
+
+      <div class="p-gutter-md lg:p-gutter-lg flex flex-col gap-gutter-md max-w-7xl w-full mx-auto flex-1">
+        <!-- Mobile Sub-navigation Tabs -->
+        <div class="lg:hidden flex items-center gap-1 overflow-x-auto bg-light-surface-container-low p-1 rounded-md border border-light-outline-variant/40">
+          <a href="ledger-report.html" aria-current="page" class="py-1.5 px-2.5 rounded-sm bg-light-surface-container-lowest text-light-primary text-center shadow-sm shrink-0"><span class="font-label text-label-sm">Ledger</span></a>
+          <a href="aeps-ledger-report.html" class="py-1.5 px-2.5 rounded-sm text-light-on-surface-variant text-center shrink-0"><span class="font-label text-label-sm">AEPS</span></a>
+          <a href="commission-ledger.html" class="py-1.5 px-2.5 rounded-sm text-light-on-surface-variant text-center shrink-0"><span class="font-label text-label-sm">Comm.</span></a>
+          <a href="commission-details.html" class="py-1.5 px-2.5 rounded-sm text-light-on-surface-variant text-center shrink-0"><span class="font-label text-label-sm">Details</span></a>
+          <a href="debit-credit-balance.html" class="py-1.5 px-2.5 rounded-sm text-light-on-surface-variant text-center shrink-0"><span class="font-label text-label-sm">Dr/Cr</span></a>
+        </div>
+
+        <!-- Top Header Bar -->
+        <header class="flex flex-col md:flex-row md:items-center justify-between gap-gutter-md">
+          <div class="flex flex-col">
+            <h1 class="font-headline text-headline-md sm:text-headline-lg text-light-on-surface">Ledger Report</h1>
+            <p class="font-body text-body-sm sm:text-body-md text-light-on-surface-variant">
+              Complete main wallet statement with opening, credit, debit, and closing balances
+            </p>
+          </div>
+
+          <div class="hidden lg:flex flex-wrap items-center gap-gutter-sm">
+            <div class="inline-flex items-center gap-gutter-sm px-gutter-md py-1.5 rounded-full bg-light-surface-container-lowest border border-light-outline-variant/60 shadow-sm">
+              <span class="font-label text-label-sm text-light-on-surface-variant">Wallet:</span>
+              <span class="font-label text-label-md text-light-primary tabular-nums">₹ 0.00</span>
+              <span class="text-light-outline-variant">|</span>
+              <span class="font-label text-label-sm text-light-on-surface-variant">AEPS:</span>
+              <span class="font-label text-label-md text-info-blue tabular-nums">₹ 0.00</span>
+            </div>
+
+            <button type="button" class="inline-flex items-center gap-gutter-sm pl-1.5 pr-gutter-md py-1.5 rounded-full bg-light-surface-container-lowest border border-light-outline-variant/60 shadow-sm">
+              <span class="w-7 h-7 rounded-full bg-brand-green text-light-on-primary inline-flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined" style="font-size: 16px;" aria-hidden="true">storefront</span>
+              </span>
+              <span class="font-label text-label-md text-light-on-surface">(BIZR109) - Mehul Enterprises</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- Security Notice Banner -->
+        <div role="alert" class="rounded-md bg-warning-amber-soft border border-warning-amber/25 px-gutter-md py-2.5 flex items-center gap-gutter-sm">
+          <span class="material-symbols-outlined text-warning-amber shrink-0" style="font-size: 20px; font-variation-settings: 'FILL' 1;" aria-hidden="true">shield</span>
+          <p class="font-label text-label-sm sm:text-label-md text-warning-amber">
+            For your security, never share your OTP with anyone, including SmartEdge representatives.
+          </p>
+        </div>
+
+        <!-- Ledger Report Card -->
+        <main>
+          <section class="bg-light-surface-container-lowest rounded-lg p-gutter-md sm:p-gutter-lg border border-light-outline-variant/40 ambient-card-shadow flex flex-col gap-gutter-lg">
+            <form data-smartedge-form data-success-msg="Ledger report refreshed." class="flex flex-col gap-gutter-md pb-gutter-md border-b border-light-outline-variant/30">
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-gutter-md items-end">
+                <div class="flex flex-col gap-gutter-xs">
+                  <label for="lr-from" class="font-label text-label-md text-light-on-surface">From Date</label>
+                  <div class="relative flex items-center">
+                    <span class="material-symbols-outlined text-light-primary absolute left-3 pointer-events-none" style="font-size: 18px;" aria-hidden="true">calendar_today</span>
+                    <input id="lr-from" type="date" value="2026-11-25" class="w-full rounded-md border border-light-outline-variant bg-light-surface-container-lowest pl-10 pr-3 py-2 text-body-md font-body text-light-on-surface tabular-nums focus:border-brand-green focus:ring-brand-green" />
+                  </div>
+                </div>
+
+                <div class="flex flex-col gap-gutter-xs">
+                  <label for="lr-upto" class="font-label text-label-md text-light-on-surface">Upto Date</label>
+                  <div class="relative flex items-center">
+                    <span class="material-symbols-outlined text-light-primary absolute left-3 pointer-events-none" style="font-size: 18px;" aria-hidden="true">calendar_today</span>
+                    <input id="lr-upto" type="date" value="2026-11-26" class="w-full rounded-md border border-light-outline-variant bg-light-surface-container-lowest pl-10 pr-3 py-2 text-body-md font-body text-light-on-surface tabular-nums focus:border-brand-green focus:ring-brand-green" />
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-gutter-sm">
+                  <button type="submit" class="w-full sm:w-auto inline-flex items-center justify-center gap-gutter-xs px-gutter-lg py-2 rounded-md bg-light-primary text-light-on-primary hover:bg-brand-green-deep transition-colors shadow-sm font-label text-label-lg">
+                    <span class="material-symbols-outlined" style="font-size: 18px;" aria-hidden="true">search</span>
+                    <span>Search</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-gutter-md pt-1">
+                <div class="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-gutter-sm">
+                  <div class="inline-flex items-center justify-center sm:justify-start gap-gutter-xs px-gutter-md py-1.5 rounded-full bg-light-inverse-surface text-light-inverse-on-surface">
+                    <span class="font-label text-label-sm sm:text-label-md">Opening. Bal. :</span>
+                    <span class="font-label text-label-sm sm:text-label-md tabular-nums">₹ 0.00</span>
+                  </div>
+
+                  <div class="inline-flex items-center justify-center sm:justify-start gap-gutter-xs px-gutter-md py-1.5 rounded-full bg-warning-amber-soft text-warning-amber border border-warning-amber/25">
+                    <span class="font-label text-label-sm sm:text-label-md">Closing. Bal. :</span>
+                    <span class="font-label text-label-sm sm:text-label-md tabular-nums">₹ 0.00</span>
+                  </div>
+                </div>
+
+                <button type="button" data-toast-msg="Exporting Ledger Report to Excel..." class="inline-flex items-center justify-center gap-gutter-xs px-gutter-md py-2 rounded-md bg-brand-mint-soft text-light-primary border border-brand-green/30 hover:bg-light-secondary-container transition-colors font-label text-label-md">
+                  <span class="material-symbols-outlined" style="font-size: 18px;" aria-hidden="true">download</span>
+                  <span>Download Excel</span>
+                </button>
+              </div>
+            </form>
+
+            <div class="w-full overflow-x-auto rounded-md border border-light-outline-variant/40">
+              <table class="w-full min-w-max text-left border-collapse">
+                <thead>
+                  <tr class="border-b border-light-outline-variant/40 bg-light-surface-container-low/80">
+                    <th scope="col" class="py-2.5 px-3 font-label text-label-sm text-light-on-surface-variant">Transaction ID</th>
+                    <th scope="col" class="py-2.5 px-3 font-label text-label-sm text-light-on-surface-variant">Date</th>
+                    <th scope="col" class="py-2.5 px-3 font-label text-label-sm text-light-on-surface-variant">Book Name/Beneficiary Name</th>
+                    <th scope="col" class="py-2.5 px-3 font-label text-label-sm text-light-on-surface-variant">User Name</th>
+                    <th scope="col" class="py-2.5 px-3 font-label text-label-sm text-light-on-surface-variant">Member No</th>
+                    <th scope="col" class="py-2.5 px-3 font-label text-label-sm text-light-on-surface-variant">Op. Bal.</th>
+                    <th scope="col" class="py-2.5 px-3 font-label text-label-sm text-light-on-surface-variant">Cr. Amt.</th>
+                    <th scope="col" class="py-2.5 px-3 font-label text-label-sm text-light-on-surface-variant">Dr. Amt.</th>
+                    <th scope="col" class="py-2.5 px-3 font-label text-label-sm text-light-on-surface-variant">Service Charge</th>
+                    <th scope="col" class="py-2.5 px-3 font-label text-label-sm text-light-on-surface-variant">Balance</th>
+                    <th scope="col" class="py-2.5 px-3 font-label text-label-sm text-light-on-surface-variant">Narration</th>
+                    <th scope="col" class="py-2.5 px-3 font-label text-label-sm text-light-on-surface-variant">Mode</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="12" class="py-14 text-center px-4">
+                      <div class="flex flex-col items-center justify-center gap-gutter-sm max-w-sm mx-auto">
+                        <span class="w-12 h-12 rounded-full bg-brand-mint-soft text-light-primary inline-flex items-center justify-center">
+                          <span class="material-symbols-outlined" style="font-size: 24px;" aria-hidden="true">menu_book</span>
+                        </span>
+                        <p class="font-title text-title-md text-light-on-surface">No ledger entries found</p>
+                        <p class="font-body text-body-sm text-light-on-surface-variant">
+                          Adjust the date range above and click Search to view wallet ledger movements and balances.
+                        </p>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </main>
+      </div>
+
+      <div id="smartedge-footer"></div>
+      <div id="smartedge-mobile-bottom-nav"></div>
+    </div>
+  </div>
+  <script src="assets/js/smartedge-shell.js"></script>
+</body>
+</html>

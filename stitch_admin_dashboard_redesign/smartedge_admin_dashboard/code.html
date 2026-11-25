@@ -1,0 +1,818 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartEdge Admin Dashboard</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">/** @type {import('tailwindcss').Config} */
+globalThis.tailwind = globalThis.tailwind || {};
+globalThis.tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        'brand-green': '#109B4D',
+        'brand-green-bright': '#48C16E',
+        'brand-green-deep': '#064E2E',
+        'brand-mint-soft': '#E6F7ED',
+        'info-blue': '#2563EB',
+        'info-blue-soft': '#EEF4FF',
+        'warning-amber': '#92400E',
+        'warning-amber-soft': '#FEF3C7',
+        'success-green': '#15803D',
+        'success-green-soft': '#DCFCE7',
+        'refund-red': '#B91C1C',
+        'refund-red-soft': '#FEE2E2',
+        'light-primary': '#006B32',
+        'light-on-primary': '#FFFFFF',
+        'light-primary-container': '#008741',
+        'light-on-primary-container': '#F7FFF3',
+        'light-secondary': '#3D6846',
+        'light-on-secondary': '#FFFFFF',
+        'light-secondary-container': '#BCECC0',
+        'light-on-secondary-container': '#416C4A',
+        'light-tertiary': '#A4324C',
+        'light-on-tertiary': '#FFFFFF',
+        'light-tertiary-container': '#C44A64',
+        'light-on-tertiary-container': '#FFFBFF',
+        'light-error': '#BA1A1A',
+        'light-on-error': '#FFFFFF',
+        'light-error-container': '#FFDAD6',
+        'light-on-error-container': '#93000A',
+        'light-background': '#F5FBF1',
+        'light-on-background': '#171D17',
+        'light-surface': '#F5FBF1',
+        'light-surface-dim': '#D5DCD2',
+        'light-surface-bright': '#F5FBF1',
+        'light-surface-container-lowest': '#FFFFFF',
+        'light-surface-container-low': '#EFF6EB',
+        'light-surface-container': '#E9F0E6',
+        'light-surface-container-high': '#E3EAE0',
+        'light-surface-container-highest': '#DEE4DA',
+        'light-on-surface': '#171D17',
+        'light-surface-variant': '#D9E6D7',
+        'light-on-surface-variant': '#3E4A3E',
+        'light-outline': '#6E7A6D',
+        'light-outline-variant': '#BDCABB',
+        'light-inverse-surface': '#2B322B',
+        'light-inverse-on-surface': '#ECF3E8',
+        'light-inverse-primary': '#66DE87',
+        'light-shadow': '#000000',
+        'light-scrim': '#000000',
+        'dark-primary': '#66DE87',
+        'dark-on-primary': '#003917',
+        'dark-primary-container': '#24A556',
+        'dark-on-primary-container': '#00260D',
+        'dark-secondary': '#A3D2A8',
+        'dark-on-secondary': '#0C381B',
+        'dark-secondary-container': '#275232',
+        'dark-on-secondary-container': '#95C49B',
+        'dark-tertiary': '#FFB2BC',
+        'dark-on-tertiary': '#670023',
+        'dark-tertiary-container': '#E8667F',
+        'dark-on-tertiary-container': '#470016',
+        'dark-error': '#FFB4AB',
+        'dark-on-error': '#690005',
+        'dark-error-container': '#93000A',
+        'dark-on-error-container': '#FFDAD6',
+        'dark-background': '#0F150F',
+        'dark-on-background': '#DEE4DA',
+        'dark-surface': '#0F150F',
+        'dark-surface-dim': '#0F150F',
+        'dark-surface-bright': '#343B34',
+        'dark-surface-container-lowest': '#09100A',
+        'dark-surface-container-low': '#171D17',
+        'dark-surface-container': '#1B211B',
+        'dark-surface-container-high': '#252C25',
+        'dark-surface-container-highest': '#303630',
+        'dark-on-surface': '#DEE4DA',
+        'dark-surface-variant': '#3E4A3E',
+        'dark-on-surface-variant': '#BDCABB',
+        'dark-outline': '#879486',
+        'dark-outline-variant': '#3E4A3E',
+        'dark-inverse-surface': '#DEE4DA',
+        'dark-inverse-on-surface': '#2B322B',
+        'dark-inverse-primary': '#006D33',
+        'dark-shadow': '#000000',
+        'dark-scrim': '#000000',
+      },
+      borderRadius: {
+        'sm': '6px',
+        'DEFAULT': '10px',
+        'md': '12px',
+        'lg': '16px',
+        'xl': '20px',
+        'full': '9999px',
+      },
+      spacing: {
+        'gutter-xs': '4px',
+        'gutter-sm': '8px',
+        'gutter-md': '16px',
+        'gutter-lg': '24px',
+        'gutter-xl': '32px',
+        'section': '24px',
+        'page-margin': '24px',
+      },
+      fontFamily: {
+        'display': ['"Afacad Flux"', 'sans-serif'],
+        'headline': ['"Afacad Flux"', 'sans-serif'],
+        'title': ['"Radio Canada Big"', 'sans-serif'],
+        'body': ['"Radio Canada Big"', 'sans-serif'],
+        'label': ['"Radio Canada Big"', 'sans-serif'],
+        'mono': ['"Spline Sans Mono"', 'monospace'],
+      },
+      fontSize: {
+        'display-lg': ['36px', { lineHeight: '42px', letterSpacing: '-0.5px', fontWeight: '700' }],
+        'display-lg-mobile': ['28px', { lineHeight: '34px', letterSpacing: '-0.25px', fontWeight: '700' }],
+        'headline-lg': ['28px', { lineHeight: '34px', letterSpacing: '-0.25px', fontWeight: '700' }],
+        'headline-md': ['24px', { lineHeight: '30px', letterSpacing: '-0.2px', fontWeight: '700' }],
+        'headline-sm': ['18px', { lineHeight: '24px', letterSpacing: '0px', fontWeight: '700' }],
+        'title-md': ['15px', { lineHeight: '22px', letterSpacing: '0px', fontWeight: '600' }],
+        'body-md': ['14px', { lineHeight: '20px', letterSpacing: '0px', fontWeight: '400' }],
+        'body-sm': ['12px', { lineHeight: '16px', letterSpacing: '0px', fontWeight: '400' }],
+        'label-lg': ['14px', { lineHeight: '20px', letterSpacing: '0px', fontWeight: '600' }],
+        'label-md': ['12px', { lineHeight: '16px', letterSpacing: '0.1px', fontWeight: '600' }],
+        'label-sm': ['11px', { lineHeight: '14px', letterSpacing: '0.2px', fontWeight: '600' }],
+        'mono-sm': ['12px', { lineHeight: '16px', letterSpacing: '0px', fontWeight: '500' }],
+      },
+      transitionDuration: {
+        'state-change': '150ms',
+        'surface-enter': '240ms',
+      },
+      transitionDelay: {
+        'state-change': '0ms',
+        'surface-enter': '0ms',
+      },
+      transitionTimingFunction: {
+        'state-change': 'ease-out',
+        'surface-enter': 'cubic-bezier(0.2, 0, 0, 1)',
+      },
+    },
+  },
+};
+if (typeof module !== 'undefined') module.exports = globalThis.tailwind.config;
+</script>
+  <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@400;500;600;700&amp;family=Radio+Canada+Big:wght@400;500;600;700&amp;family=Spline+Sans+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet">
+  <style>
+    .material-symbols-outlined, .material-symbols-rounded, .material-symbols-sharp, .material-icons {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      line-height: 1 !important;
+      box-sizing: content-box;
+      overflow: hidden;
+      white-space: nowrap;
+      direction: ltr;
+      vertical-align: middle;
+    }
+    .ambient-card-shadow {
+      box-shadow: 0 8px 24px -6px rgba(16, 155, 77, 0.06), 0 2px 6px -1px rgba(23, 29, 23, 0.03);
+    }
+    .active-nav-gradient {
+      background: linear-gradient(90deg, #006B32 0%, #0D7A3E 100%);
+      box-shadow: 0 6px 16px -4px rgba(0, 107, 50, 0.35);
+    }
+    .promo-banner-gradient {
+      background: linear-gradient(135deg, #064E2E 0%, #0D7A3E 55%, #199E52 100%);
+    }
+    .hero-top-wash {
+      background: radial-gradient(ellipse 65% 45% at 42% 0%, rgba(131, 251, 161, 0.22) 0%, rgba(245, 251, 241, 0) 70%);
+    }
+  </style>
+</head>
+<body class="bg-light-surface text-light-on-surface font-body antialiased selection:bg-brand-mint-soft selection:text-light-primary">
+  <div class="min-h-[1024px] flex flex-col lg:flex-row relative overflow-x-hidden hero-top-wash" data-stitch-vh="min-h-[1024px]===min-h-screen">
+
+    <!-- Persistent Left Sidebar -->
+    <aside class="w-full lg:w-60 shrink-0 bg-light-surface-container-lowest/95 border-b lg:border-b-0 lg:border-r border-light-outline-variant/40 flex flex-col justify-between min-h-[1024px] relative overflow-hidden" data-stitch-vh="min-h-[1024px]===min-h-screen">
+      <!-- Top Brand & Navigation -->
+      <div class="p-gutter-md flex flex-col gap-gutter-lg relative z-10">
+        <!-- Brand Mark -->
+        <a href="#dashboard" class="flex flex-col gap-1 group px-1">
+          <div class="flex items-center gap-gutter-sm">
+            <div class="w-9 h-9 rounded-md bg-brand-green flex items-center justify-center shadow-sm shrink-0">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M16.5 6.5H10.2C8.1 6.5 6.8 7.8 6.8 9.4C6.8 11.1 8.1 12 10.4 12.4L13.6 13C15.8 13.4 16.8 14.3 16.8 15.8C16.8 17.5 15.3 18.6 13 18.6H7.2" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"></path>
+                <path d="M14.5 4.5L17.5 6.5L14.5 8.5" stroke="#83FBA1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </div>
+            <span data-design-text-token="headline-md" class="font-headline text-headline-md text-brand-green-deep tracking-tight leading-none">SmartEdge</span>
+          </div>
+          <span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">Fast · Secure · Smart Payments</span>
+        </a>
+
+        <!-- Primary Navigation -->
+        <nav aria-label="Main navigation" class="flex flex-col gap-gutter-xs">
+          <a href="#dashboard" aria-current="page" class="active-nav-gradient flex items-center gap-gutter-sm px-gutter-md py-2.5 rounded-md text-light-on-primary transition-transform duration-state-change ease-state-change">
+            <span class="material-symbols-outlined text-light-on-primary" style="font-size: 20px; font-variation-settings: &#39;FILL&#39; 1;" aria-hidden="true">home</span>
+            <span data-design-text-token="label-lg" class="font-label text-label-lg">Dashboard</span>
+          </a>
+
+          <a href="#fund-request" class="flex items-center justify-between px-gutter-md py-2.5 rounded-md text-light-on-surface hover:bg-light-surface-container-low transition-colors duration-state-change ease-state-change group">
+            <span class="flex items-center gap-gutter-sm">
+              <span class="material-symbols-outlined text-light-primary" style="font-size: 20px;" aria-hidden="true">account_balance_wallet</span>
+              <span data-design-text-token="label-lg" class="font-label text-label-lg">Fund Request</span>
+            </span>
+            <span class="material-symbols-outlined text-light-on-surface-variant group-hover:text-light-primary transition-colors" style="font-size: 18px;" aria-hidden="true">chevron_right</span>
+          </a>
+
+          <a href="#transactions" class="flex items-center justify-between px-gutter-md py-2.5 rounded-md text-light-on-surface hover:bg-light-surface-container-low transition-colors duration-state-change ease-state-change group">
+            <span class="flex items-center gap-gutter-sm">
+              <span class="material-symbols-outlined text-light-primary" style="font-size: 20px;" aria-hidden="true">receipt_long</span>
+              <span data-design-text-token="label-lg" class="font-label text-label-lg">Transactions</span>
+            </span>
+            <span class="material-symbols-outlined text-light-on-surface-variant group-hover:text-light-primary transition-colors" style="font-size: 18px;" aria-hidden="true">chevron_right</span>
+          </a>
+
+          <a href="#reports" class="flex items-center justify-between px-gutter-md py-2.5 rounded-md text-light-on-surface hover:bg-light-surface-container-low transition-colors duration-state-change ease-state-change group">
+            <span class="flex items-center gap-gutter-sm">
+              <span class="material-symbols-outlined text-light-primary" style="font-size: 20px;" aria-hidden="true">summarize</span>
+              <span data-design-text-token="label-lg" class="font-label text-label-lg">Reports</span>
+            </span>
+            <span class="material-symbols-outlined text-light-on-surface-variant group-hover:text-light-primary transition-colors" style="font-size: 18px;" aria-hidden="true">chevron_right</span>
+          </a>
+
+          <a href="#settlement" class="flex items-center justify-between px-gutter-md py-2.5 rounded-md text-light-on-surface hover:bg-light-surface-container-low transition-colors duration-state-change ease-state-change group">
+            <span class="flex items-center gap-gutter-sm">
+              <span class="material-symbols-outlined text-light-primary" style="font-size: 20px;" aria-hidden="true">account_balance</span>
+              <span data-design-text-token="label-lg" class="font-label text-label-lg">Settlement</span>
+            </span>
+            <span class="material-symbols-outlined text-light-on-surface-variant group-hover:text-light-primary transition-colors" style="font-size: 18px;" aria-hidden="true">chevron_right</span>
+          </a>
+
+          <a href="#setting" class="flex items-center justify-between px-gutter-md py-2.5 rounded-md text-light-on-surface hover:bg-light-surface-container-low transition-colors duration-state-change ease-state-change group">
+            <span class="flex items-center gap-gutter-sm">
+              <span class="material-symbols-outlined text-light-primary" style="font-size: 20px;" aria-hidden="true">settings</span>
+              <span data-design-text-token="label-lg" class="font-label text-label-lg">Setting</span>
+            </span>
+            <span class="material-symbols-outlined text-light-on-surface-variant group-hover:text-light-primary transition-colors" style="font-size: 18px;" aria-hidden="true">chevron_right</span>
+          </a>
+
+          <a href="#aeps-drivers" class="flex items-center justify-between px-gutter-md py-2.5 rounded-md text-light-on-surface hover:bg-light-surface-container-low transition-colors duration-state-change ease-state-change group">
+            <span class="flex items-center gap-gutter-sm">
+              <span class="material-symbols-outlined text-light-primary" style="font-size: 20px;" aria-hidden="true">badge</span>
+              <span data-design-text-token="label-lg" class="font-label text-label-lg">AEPS Drivers</span>
+            </span>
+            <span class="material-symbols-outlined text-light-on-surface-variant group-hover:text-light-primary transition-colors" style="font-size: 18px;" aria-hidden="true">chevron_right</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Sidebar Bottom Logout & Decorative Organic Wave -->
+      <div class="relative pt-gutter-lg pb-gutter-xl px-gutter-md z-10">
+        <!-- COMPONENT: button-with-icon -->
+        <button data-component-id="button-with-icon" data-component-type="button" data-component-variant="with-icon" type="button" class="w-full inline-flex items-center justify-start gap-gutter-sm px-gutter-md py-2.5 rounded-md bg-light-surface-container-lowest/90 border border-light-outline-variant text-light-on-surface hover:bg-light-surface-container-low transition-colors duration-state-change ease-state-change relative z-20">
+          <span class="material-symbols-outlined text-light-primary" style="font-size: 18px;" aria-hidden="true">logout</span>
+          <span data-design-text-token="label-lg" class="font-label text-label-lg">Logout</span>
+        </button>
+      </div>
+
+      <!-- Decorative Bottom-Left Organic Emerald Wave -->
+      <svg class="absolute bottom-0 left-0 w-full h-36 pointer-events-none select-none z-0" viewBox="0 0 256 144" fill="none" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 92C44 68 88 108 134 94C182 80 218 32 256 44V144H0V92Z" fill="#C4FFCB" fill-opacity="0.55"></path>
+        <path d="M0 112C56 78 108 122 162 104C205 90 232 68 256 76V144H0V112Z" fill="#48C16E" fill-opacity="0.45"></path>
+        <path d="M0 126C62 102 122 136 184 118C218 108 238 98 256 104V144H0V126Z" fill="#109B4D" fill-opacity="0.7"></path>
+      </svg>
+    </aside>
+
+    <!-- Main Workspace -->
+    <div class="flex-1 flex flex-col min-w-0 justify-between">
+      <div class="p-gutter-md lg:p-gutter-lg flex flex-col gap-section max-w-7xl w-full mx-auto">
+
+        <!-- Top Header Bar -->
+        <header class="flex flex-col md:flex-row md:items-center justify-between gap-gutter-md">
+          <div class="flex flex-col">
+            <h1 data-design-text-token="headline-lg" class="font-headline text-headline-lg text-light-on-surface flex items-center gap-gutter-sm">
+              <span>Hello, Mehul Enterprises</span>
+              <span aria-hidden="true">👋</span>
+            </h1>
+            <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant">
+              Here&#39;s your business overview for today.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-gutter-sm">
+            <!-- Global Search Bar -->
+            <div class="relative flex items-center bg-light-surface-container-lowest border border-light-outline-variant/60 rounded-full px-gutter-md py-2 shadow-sm w-full sm:w-64 focus-within:border-brand-green focus-within:ring-2 focus-within:ring-brand-green/20 transition-all duration-state-change">
+              <span class="material-symbols-outlined text-light-on-surface-variant mr-gutter-sm" style="font-size: 18px;" aria-hidden="true">search</span>
+              <input id="global-search" type="search" placeholder="Search transactions, UTR, mobile..." aria-label="Search transactions, UTR, mobile" class="w-full bg-transparent border-0 p-0 text-body-sm font-body text-light-on-surface placeholder:text-light-on-surface-variant focus:ring-0">
+              <kbd data-design-text-token="mono-sm" class="font-mono text-mono-sm text-light-on-surface-variant bg-light-surface-container-low px-1.5 py-0.5 rounded-sm border border-light-outline-variant/40 ml-gutter-xs shrink-0">⌘K</kbd>
+            </div>
+
+            <!-- Notification Bell -->
+            <!-- COMPONENT: button-icon -->
+            <button data-component-id="button-icon" data-component-type="button" data-component-variant="icon" type="button" aria-label="Notifications" class="relative inline-flex items-center justify-center w-10 h-10 rounded-full bg-light-surface-container-lowest border border-light-outline-variant/60 text-light-on-surface hover:bg-light-surface-container-low shadow-sm transition-colors duration-state-change">
+              <span class="material-symbols-outlined" style="font-size: 20px;" aria-hidden="true">notifications</span>
+              <!-- COMPONENT: badge-dot -->
+              <span data-component-id="badge-dot" data-component-type="badge" data-component-variant="dot" role="status" aria-label="Unread notifications" class="absolute top-2 right-2.5 inline-block w-2 h-2 rounded-full bg-refund-red ring-2 ring-light-surface-container-lowest"></span>
+            </button>
+
+            <!-- Business Profile Pill -->
+            <button type="button" class="inline-flex items-center gap-gutter-sm pl-1.5 pr-gutter-md py-1.5 rounded-full bg-light-surface-container-lowest border border-light-outline-variant/60 shadow-sm hover:bg-light-surface-container-low transition-colors duration-state-change">
+              <span class="w-7 h-7 rounded-full bg-brand-green text-light-on-primary inline-flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined" style="font-size: 16px;" aria-hidden="true">storefront</span>
+              </span>
+              <span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface">(BIZR109) - MEHUL ENTERPRISES</span>
+              <span class="material-symbols-outlined text-light-on-surface-variant" style="font-size: 18px;" aria-hidden="true">keyboard_arrow_down</span>
+            </button>
+          </div>
+        </header>
+
+        <main class="flex flex-col gap-section">
+          <!-- Row 1: 3 Wallet KPI Cards -->
+          <section aria-label="Wallet balances" class="grid grid-cols-1 md:grid-cols-3 gap-gutter-md items-stretch">
+            <!-- Wallet Balance Card -->
+            <!-- COMPONENT: card-elevated -->
+            <article data-component-id="card-elevated" data-component-type="card" data-component-variant="elevated" class="relative overflow-hidden bg-light-surface-container-lowest rounded-lg p-gutter-lg border border-light-outline-variant/40 ambient-card-shadow flex items-center justify-between h-full">
+              <div class="flex items-center gap-gutter-md relative z-10">
+                <div class="w-12 h-12 rounded-md bg-brand-mint-soft text-light-primary flex items-center justify-center shrink-0">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <rect x="3" y="6" width="18" height="13" rx="3" stroke="#109B4D" stroke-width="2"></rect>
+                    <path d="M16 12.5C16 11.67 16.67 11 17.5 11H21V14H17.5C16.67 14 16 13.33 16 12.5Z" fill="#109B4D"></path>
+                    <path d="M6 6V5C6 3.9 6.9 3 8 3H16" stroke="#48C16E" stroke-width="2" stroke-linecap="round"></path>
+                  </svg>
+                </div>
+                <div class="flex flex-col">
+                  <span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface-variant">Wallet Balance</span>
+                  <span id="val-wallet" data-balance="₹ 104.09" data-design-text-token="headline-lg" class="font-headline text-headline-lg text-light-on-surface tabular-nums">₹ 104.09</span>
+                </div>
+              </div>
+              <button type="button" onclick="toggleBalance(&#39;val-wallet&#39;, this)" aria-label="Toggle Wallet Balance visibility" class="relative z-10 text-light-on-surface-variant hover:text-light-primary transition-colors p-1 self-start">
+                <span class="material-symbols-outlined" style="font-size: 20px;" aria-hidden="true">visibility</span>
+              </button>
+              <svg class="absolute bottom-0 right-0 w-44 h-12 pointer-events-none" viewBox="0 0 180 48" fill="none" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M20 48C56 36 82 14 114 26C142 36 160 18 180 24V48H20Z" fill="#C4FFCB" fill-opacity="0.55"></path>
+              </svg>
+            </article>
+
+            <!-- AEPS Wallet Card -->
+            <!-- COMPONENT: card-elevated -->
+            <article data-component-id="card-elevated" data-component-type="card" data-component-variant="elevated" class="relative overflow-hidden bg-light-surface-container-lowest rounded-lg p-gutter-lg border border-light-outline-variant/40 ambient-card-shadow flex items-center justify-between h-full">
+              <div class="flex items-center gap-gutter-md relative z-10">
+                <div class="w-12 h-12 rounded-md bg-info-blue-soft text-info-blue flex items-center justify-center shrink-0">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M12 4L3 8.5L12 13L21 8.5L12 4Z" fill="#2563EB" fill-opacity="0.2" stroke="#2563EB" stroke-width="1.8" stroke-linejoin="round"></path>
+                    <path d="M3 12.5L12 17L21 12.5" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M3 16.5L12 21L21 16.5" stroke="#60A5FA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </div>
+                <div class="flex flex-col">
+                  <span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface-variant">AEPS Wallet</span>
+                  <span id="val-aeps" data-balance="₹ 0.00" data-design-text-token="headline-lg" class="font-headline text-headline-lg text-light-on-surface tabular-nums">₹ 0.00</span>
+                </div>
+              </div>
+              <button type="button" onclick="toggleBalance(&#39;val-aeps&#39;, this)" aria-label="Toggle AEPS Wallet visibility" class="relative z-10 text-light-on-surface-variant hover:text-info-blue transition-colors p-1 self-start">
+                <span class="material-symbols-outlined" style="font-size: 20px;" aria-hidden="true">visibility</span>
+              </button>
+              <svg class="absolute bottom-0 right-0 w-44 h-12 pointer-events-none" viewBox="0 0 180 48" fill="none" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M20 48C58 34 86 18 118 28C144 36 164 16 180 22V48H20Z" fill="#DBEAFE" fill-opacity="0.75"></path>
+              </svg>
+            </article>
+
+            <!-- Commission Card -->
+            <!-- COMPONENT: card-elevated -->
+            <article data-component-id="card-elevated" data-component-type="card" data-component-variant="elevated" class="relative overflow-hidden bg-light-surface-container-lowest rounded-lg p-gutter-lg border border-light-outline-variant/40 ambient-card-shadow flex items-center justify-between h-full">
+              <div class="flex items-center gap-gutter-md relative z-10">
+                <div class="w-12 h-12 rounded-md bg-warning-amber-soft text-warning-amber flex items-center justify-center shrink-0">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M18 6L6 18" stroke="#92400E" stroke-width="2.2" stroke-linecap="round"></path>
+                    <circle cx="7.5" cy="7.5" r="2.5" stroke="#92400E" stroke-width="2"></circle>
+                    <circle cx="16.5" cy="16.5" r="2.5" stroke="#D97706" stroke-width="2"></circle>
+                  </svg>
+                </div>
+                <div class="flex flex-col">
+                  <span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface-variant">Commission</span>
+                  <span id="val-commission" data-balance="₹ 60.32" data-design-text-token="headline-lg" class="font-headline text-headline-lg text-light-on-surface tabular-nums">₹ 60.32</span>
+                </div>
+              </div>
+              <button type="button" onclick="toggleBalance(&#39;val-commission&#39;, this)" aria-label="Toggle Commission visibility" class="relative z-10 text-light-on-surface-variant hover:text-warning-amber transition-colors p-1 self-start">
+                <span class="material-symbols-outlined" style="font-size: 20px;" aria-hidden="true">visibility</span>
+              </button>
+              <svg class="absolute bottom-0 right-0 w-44 h-12 pointer-events-none" viewBox="0 0 180 48" fill="none" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M20 48C56 38 86 16 118 28C144 38 162 20 180 26V48H20Z" fill="#FEF3C7" fill-opacity="0.9"></path>
+              </svg>
+            </article>
+          </section>
+
+          <!-- Row 2: Quick Actions (Left) + SmartEdge Promo Banner (Right) -->
+          <section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-md items-stretch">
+            <!-- Quick Actions -->
+            <div class="lg:col-span-8 flex flex-col justify-between gap-gutter-md">
+              <div class="flex items-end justify-between gap-gutter-md">
+                <div>
+                  <h2 data-design-text-token="headline-md" class="font-headline text-headline-md text-light-on-surface">Quick Actions</h2>
+                  <p data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">Perform your most common tasks quickly</p>
+                </div>
+                <a href="#services" class="inline-flex items-center gap-gutter-xs text-light-primary hover:text-brand-green-deep transition-colors">
+                  <span data-design-text-token="label-md" class="font-label text-label-md">View All Services</span>
+                  <span class="material-symbols-outlined" style="font-size: 16px;" aria-hidden="true">arrow_forward</span>
+                </a>
+              </div>
+
+              <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-gutter-sm items-stretch">
+                <!-- 1. Money Transfer (Active Mint Tile) -->
+                <!-- COMPONENT: card-interactive -->
+                <a href="#money-transfer" data-component-id="card-interactive" data-component-type="card" data-component-variant="interactive" class="flex flex-col items-center justify-center gap-gutter-sm px-gutter-xs py-gutter-md rounded-lg bg-brand-mint-soft border border-brand-green/40 ambient-card-shadow hover:-translate-y-0.5 transition-transform duration-state-change ease-state-change text-center h-full min-w-0">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M21 3L10 14" stroke="#109B4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M21 3L14 21L10 14L3 10L21 3Z" stroke="#109B4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#109B4D" fill-opacity="0.12"></path>
+                  </svg>
+                  <span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface leading-tight">Money Transfer</span>
+                </a>
+
+                <!-- 2. Money Transfer 2 -->
+                <!-- COMPONENT: card-interactive-2 -->
+                <a href="#money-transfer-2" data-component-id="card-interactive-2" data-component-type="card" data-component-variant="interactive" class="flex flex-col items-center justify-center gap-gutter-sm px-gutter-xs py-gutter-md rounded-lg bg-light-surface-container-lowest border border-light-outline-variant/40 ambient-card-shadow hover:border-brand-green/50 hover:-translate-y-0.5 transition-all duration-state-change ease-state-change text-center h-full min-w-0">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M4 9H19L15 5" stroke="#109B4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M20 15H5L9 19" stroke="#48C16E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                  <span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface leading-tight">Money Transfer 2</span>
+                </a>
+
+                <!-- 3. BizPPI Transfer -->
+                <!-- COMPONENT: card-interactive-2 -->
+                <a href="#bizppi-transfer" data-component-id="card-interactive-2" data-component-type="card" data-component-variant="interactive" class="flex flex-col items-center justify-center gap-gutter-sm px-gutter-xs py-gutter-md rounded-lg bg-light-surface-container-lowest border border-light-outline-variant/40 ambient-card-shadow hover:border-brand-green/50 hover:-translate-y-0.5 transition-all duration-state-change ease-state-change text-center h-full min-w-0">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <rect x="3" y="5" width="18" height="14" rx="2.5" stroke="#109B4D" stroke-width="2"></rect>
+                    <path d="M3 10H21" stroke="#109B4D" stroke-width="2"></path>
+                    <rect x="6" y="13" width="5" height="2.5" rx="1" fill="#48C16E"></rect>
+                  </svg>
+                  <span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface leading-tight">BizPPI Transfer</span>
+                </a>
+
+                <!-- 4. Flight Booking -->
+                <!-- COMPONENT: card-interactive-2 -->
+                <a href="#flight-booking" data-component-id="card-interactive-2" data-component-type="card" data-component-variant="interactive" class="flex flex-col items-center justify-center gap-gutter-sm px-gutter-xs py-gutter-md rounded-lg bg-light-surface-container-lowest border border-light-outline-variant/40 ambient-card-shadow hover:border-brand-green/50 hover:-translate-y-0.5 transition-all duration-state-change ease-state-change text-center h-full min-w-0">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M21 16V14L13 9V3.5C13 2.67 12.33 2 11.5 2C10.67 2 10 2.67 10 3.5V9L2 14V16L10 13.5V19L8 20.5V22L11.5 21L15 22V20.5L13 19V13.5L21 16Z" stroke="#109B4D" stroke-width="1.8" stroke-linejoin="round" fill="#109B4D" fill-opacity="0.1"></path>
+                  </svg>
+                  <span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface leading-tight">Flight Booking</span>
+                </a>
+
+                <!-- 5. Recharge-II -->
+                <!-- COMPONENT: card-interactive-2 -->
+                <a href="#recharge" data-component-id="card-interactive-2" data-component-type="card" data-component-variant="interactive" class="flex flex-col items-center justify-center gap-gutter-sm px-gutter-xs py-gutter-md rounded-lg bg-light-surface-container-lowest border border-light-outline-variant/40 ambient-card-shadow hover:border-brand-green/50 hover:-translate-y-0.5 transition-all duration-state-change ease-state-change text-center h-full min-w-0">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <rect x="6" y="3" width="12" height="18" rx="2.5" stroke="#109B4D" stroke-width="2"></rect>
+                    <path d="M13 8L10 12.5H13L11.5 16L14.5 11.5H11.5L13 8Z" fill="#109B4D"></path>
+                  </svg>
+                  <span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface leading-tight">Recharge-II</span>
+                </a>
+
+                <!-- 6. Redeem -->
+                <!-- COMPONENT: card-interactive-2 -->
+                <a href="#redeem" data-component-id="card-interactive-2" data-component-type="card" data-component-variant="interactive" class="flex flex-col items-center justify-center gap-gutter-sm px-gutter-xs py-gutter-md rounded-lg bg-light-surface-container-lowest border border-light-outline-variant/40 ambient-card-shadow hover:border-brand-green/50 hover:-translate-y-0.5 transition-all duration-state-change ease-state-change text-center h-full min-w-0">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <rect x="4" y="10" width="16" height="10" rx="2" stroke="#109B4D" stroke-width="2"></rect>
+                    <path d="M3 10H21V7C21 6.45 20.55 6 20 6H4C3.45 6 3 6.45 3 7V10Z" stroke="#109B4D" stroke-width="2" fill="#48C16E" fill-opacity="0.15"></path>
+                    <path d="M12 6V20" stroke="#109B4D" stroke-width="2"></path>
+                    <path d="M12 6C12 4.3 10.5 3 9 3C7.8 3 7 3.8 7 4.8C7 5.5 7.7 6 8.5 6H12Z" stroke="#109B4D" stroke-width="1.8"></path>
+                    <path d="M12 6C12 4.3 13.5 3 15 3C16.2 3 17 3.8 17 4.8C17 5.5 16.3 6 15.5 6H12Z" stroke="#109B4D" stroke-width="1.8"></path>
+                  </svg>
+                  <span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface leading-tight">Redeem</span>
+                </a>
+
+                <!-- 7. SmartWallet -->
+                <!-- COMPONENT: card-interactive-2 -->
+                <a href="#smart-wallet" data-component-id="card-interactive-2" data-component-type="card" data-component-variant="interactive" class="flex flex-col items-center justify-center gap-gutter-sm px-gutter-xs py-gutter-md rounded-lg bg-light-surface-container-lowest border border-light-outline-variant/40 ambient-card-shadow hover:border-brand-green/50 hover:-translate-y-0.5 transition-all duration-state-change ease-state-change text-center h-full min-w-0">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <rect x="3" y="6" width="18" height="13" rx="3" stroke="#109B4D" stroke-width="2"></rect>
+                    <path d="M15.5 12.5C15.5 11.67 16.17 11 17 11H21V14H17C16.17 14 15.5 13.33 15.5 12.5Z" fill="#109B4D"></path>
+                    <path d="M6 6V5C6 3.9 6.9 3 8 3H16" stroke="#48C16E" stroke-width="2" stroke-linecap="round"></path>
+                  </svg>
+                  <span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface leading-tight">SmartWallet</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Promo Banner Card -->
+            <div class="lg:col-span-4">
+              <article class="promo-banner-gradient rounded-lg p-gutter-md text-light-on-primary relative overflow-hidden h-full min-h-[168px] flex items-center justify-between ambient-card-shadow">
+                <!-- Subtle Organic Background Curves -->
+                <svg class="absolute inset-0 w-full h-full pointer-events-none opacity-25" viewBox="0 0 400 180" fill="none" preserveAspectRatio="none" aria-hidden="true">
+                  <path d="M-20 150C80 90 160 170 260 100C330 50 380 80 420 40V190H-20V150Z" fill="#83FBA1"></path>
+                  <circle cx="320" cy="30" r="90" fill="#48C16E" fill-opacity="0.3"></circle>
+                </svg>
+
+                <div class="relative z-10 flex flex-col items-start gap-gutter-xs max-w-[68%]">
+                  <span data-design-text-token="headline-md" class="font-headline text-headline-md text-light-on-primary leading-tight">SmartEdge</span>
+                  <p data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-primary-container leading-snug text-pretty">
+                    Fast • Secure • Reliable Payment Solutions
+                  </p>
+                  <a href="#explore-services" class="mt-gutter-xs inline-flex items-center gap-gutter-xs px-gutter-md py-1.5 rounded-full bg-light-surface-container-lowest text-brand-green-deep hover:bg-brand-mint-soft transition-colors duration-state-change shadow-sm">
+                    <span data-design-text-token="label-sm" class="font-label text-label-sm">Explore Services</span>
+                    <span class="material-symbols-outlined" style="font-size: 15px;" aria-hidden="true">arrow_forward</span>
+                  </a>
+                </div>
+
+                <!-- High-Craft Angled Smartphone Illustration -->
+                <div class="relative z-10 shrink-0 -mr-2 -mb-8 transform rotate-12">
+                  <svg width="96" height="136" viewBox="0 0 108 148" fill="none" aria-hidden="true">
+                    <rect x="6" y="4" width="96" height="142" rx="18" fill="#171D17" stroke="#3E4A3E" stroke-width="2"></rect>
+                    <rect x="12" y="10" width="84" height="130" rx="13" fill="#F5FBF1"></rect>
+                    <rect x="38" y="14" width="32" height="6" rx="3" fill="#171D17"></rect>
+                    <!-- SmartEdge App Icon on Phone Screen -->
+                    <rect x="32" y="48" width="44" height="44" rx="12" fill="#109B4D"></rect>
+                    <path d="M62 60H50.5C47.5 60 45.5 61.8 45.5 64.2C45.5 66.8 47.5 68 50.8 68.7L55.5 69.7C58.8 70.4 60.5 71.8 60.5 74.3C60.5 76.9 58.3 78.6 54.8 78.6H46" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round"></path>
+                    <path d="M58.5 57L63 60L58.5 63" stroke="#83FBA1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <rect x="28" y="104" width="52" height="5" rx="2.5" fill="#D9E6D7"></rect>
+                    <rect x="36" y="114" width="36" height="4" rx="2" fill="#E9F0E6"></rect>
+                  </svg>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <!-- Row 3: Last 10 Transactions (Left) + Business Summary (Right) -->
+          <section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-md items-stretch">
+            <!-- Last 10 Transactions Table Card -->
+            <div class="lg:col-span-8 bg-light-surface-container-lowest rounded-lg p-gutter-md border border-light-outline-variant/40 ambient-card-shadow flex flex-col gap-gutter-md">
+              <div class="flex flex-wrap items-center justify-between gap-gutter-sm">
+                <div class="flex items-center gap-gutter-sm">
+                  <span class="w-8 h-8 rounded-md bg-brand-mint-soft text-light-primary inline-flex items-center justify-center">
+                    <span class="material-symbols-outlined" style="font-size: 18px;" aria-hidden="true">description</span>
+                  </span>
+                  <h2 data-design-text-token="headline-sm" class="font-headline text-headline-sm text-light-on-surface">Last 10 Transactions</h2>
+                </div>
+                <!-- COMPONENT: button-secondary -->
+                <a href="#all-transactions" data-component-id="button-secondary" data-component-type="button" data-component-variant="secondary" class="inline-flex items-center gap-gutter-xs px-gutter-md py-1.5 rounded-full bg-brand-mint-soft text-light-primary hover:bg-light-secondary-container transition-colors duration-state-change">
+                  <span data-design-text-token="label-md" class="font-label text-label-md">View All Transactions</span>
+                  <span class="material-symbols-outlined" style="font-size: 16px;" aria-hidden="true">arrow_forward</span>
+                </a>
+              </div>
+
+              <!-- COMPONENT: table-standard -->
+              <div data-component-id="table-standard" data-component-type="table" data-component-variant="standard" class="w-full overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                  <thead>
+                    <tr class="border-b border-light-outline-variant/40">
+                      <th scope="col" class="py-gutter-sm pr-1.5">
+                        <span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface-variant">Date &amp; Time</span>
+                      </th>
+                      <th scope="col" class="py-gutter-sm px-1.5">
+                        <span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface-variant">Mobile</span>
+                      </th>
+                      <th scope="col" class="py-gutter-sm px-1.5">
+                        <span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface-variant">Account No</span>
+                      </th>
+                      <th scope="col" class="py-gutter-sm px-1.5">
+                        <span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface-variant">Amount</span>
+                      </th>
+                      <th scope="col" class="py-gutter-sm px-1.5">
+                        <span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface-variant">Status</span>
+                      </th>
+                      <th scope="col" class="py-gutter-sm pl-1.5">
+                        <span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface-variant">UTRNO</span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-light-outline-variant/30">
+                    <tr class="hover:bg-light-surface-container-low/50 transition-colors duration-state-change">
+                      <td class="py-2.5 pr-1.5"><span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface tabular-nums">Nov 7 2026, 9:30 PM</span></td>
+                      <td class="py-2.5 px-1.5"><span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface tabular-nums">7011741998</span></td>
+                      <td class="py-2.5 px-1.5"><span data-design-text-token="mono-sm" class="font-mono text-mono-sm text-light-on-surface-variant tabular-nums">064822010000283</span></td>
+                      <td class="py-2.5 px-1.5"><span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface tabular-nums">₹19,999.00</span></td>
+                      <td class="py-2.5 px-1.5">
+                        <span data-component-id="badge-success" data-component-type="badge" data-component-variant="success" role="status" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-success-green-soft text-success-green">
+                          <span class="material-symbols-outlined" style="font-size: 13px; font-variation-settings: &#39;FILL&#39; 1;" aria-hidden="true">check_circle</span>
+                          <span data-design-text-token="label-sm" class="font-label text-label-sm">Success</span>
+                        </span>
+                      </td>
+                      <td class="py-2.5 pl-1.5"><span data-design-text-token="mono-sm" class="font-mono text-mono-sm text-light-on-surface-variant tabular-nums">631128073926</span></td>
+                    </tr>
+
+                    <tr class="hover:bg-light-surface-container-low/50 transition-colors duration-state-change">
+                      <td class="py-2.5 pr-1.5"><span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface tabular-nums">Nov 7 2026, 9:29 PM</span></td>
+                      <td class="py-2.5 px-1.5"><span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface tabular-nums">7011741998</span></td>
+                      <td class="py-2.5 px-1.5"><span data-design-text-token="mono-sm" class="font-mono text-mono-sm text-light-on-surface-variant tabular-nums">064822010000283</span></td>
+                      <td class="py-2.5 px-1.5"><span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface tabular-nums">₹0.00</span></td>
+                      <td class="py-2.5 px-1.5">
+                        <span data-component-id="badge-warning" data-component-type="badge" data-component-variant="warning" role="status" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-warning-amber-soft text-warning-amber">
+                          <span class="material-symbols-outlined" style="font-size: 13px; font-variation-settings: &#39;FILL&#39; 1;" aria-hidden="true">schedule</span>
+                          <span data-design-text-token="label-sm" class="font-label text-label-sm">Verification</span>
+                        </span>
+                      </td>
+                      <td class="py-2.5 pl-1.5"><span data-design-text-token="mono-sm" class="font-mono text-mono-sm text-light-on-surface-variant">-</span></td>
+                    </tr>
+
+                    <tr class="hover:bg-light-surface-container-low/50 transition-colors duration-state-change">
+                      <td class="py-2.5 pr-1.5"><span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface tabular-nums">Nov 5 2026, 5:57 PM</span></td>
+                      <td class="py-2.5 px-1.5"><span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface tabular-nums">7011741998</span></td>
+                      <td class="py-2.5 px-1.5"><span data-design-text-token="mono-sm" class="font-mono text-mono-sm text-light-on-surface-variant tabular-nums">15380200008679</span></td>
+                      <td class="py-2.5 px-1.5"><span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface tabular-nums">₹0.00</span></td>
+                      <td class="py-2.5 px-1.5">
+                        <span data-component-id="badge-warning" data-component-type="badge" data-component-variant="warning" role="status" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-warning-amber-soft text-warning-amber">
+                          <span class="material-symbols-outlined" style="font-size: 13px; font-variation-settings: &#39;FILL&#39; 1;" aria-hidden="true">schedule</span>
+                          <span data-design-text-token="label-sm" class="font-label text-label-sm">Verification</span>
+                        </span>
+                      </td>
+                      <td class="py-2.5 pl-1.5"><span data-design-text-token="mono-sm" class="font-mono text-mono-sm text-light-on-surface-variant">-</span></td>
+                    </tr>
+
+                    <tr class="hover:bg-light-surface-container-low/50 transition-colors duration-state-change">
+                      <td class="py-2.5 pr-1.5"><span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface tabular-nums">Nov 2 2026, 4:34 PM</span></td>
+                      <td class="py-2.5 px-1.5"><span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface tabular-nums">7011741998</span></td>
+                      <td class="py-2.5 px-1.5"><span data-design-text-token="mono-sm" class="font-mono text-mono-sm text-light-on-surface-variant tabular-nums">002912100024052</span></td>
+                      <td class="py-2.5 px-1.5"><span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface tabular-nums">₹5,00,000.00</span></td>
+                      <td class="py-2.5 px-1.5">
+                        <span data-component-id="badge-success" data-component-type="badge" data-component-variant="success" role="status" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-success-green-soft text-success-green">
+                          <span class="material-symbols-outlined" style="font-size: 13px; font-variation-settings: &#39;FILL&#39; 1;" aria-hidden="true">check_circle</span>
+                          <span data-design-text-token="label-sm" class="font-label text-label-sm">Success</span>
+                        </span>
+                      </td>
+                      <td class="py-2.5 pl-1.5"><span data-design-text-token="mono-sm" class="font-mono text-mono-sm text-light-on-surface-variant tabular-nums">630616097916</span></td>
+                    </tr>
+
+                    <tr class="hover:bg-light-surface-container-low/50 transition-colors duration-state-change">
+                      <td class="py-2.5 pr-1.5"><span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface tabular-nums">Nov 2 2026, 4:32 PM</span></td>
+                      <td class="py-2.5 px-1.5"><span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface tabular-nums">7011741998</span></td>
+                      <td class="py-2.5 px-1.5"><span data-design-text-token="mono-sm" class="font-mono text-mono-sm text-light-on-surface-variant tabular-nums">20387713681</span></td>
+                      <td class="py-2.5 px-1.5"><span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface tabular-nums">₹5,00,000.00</span></td>
+                      <td class="py-2.5 px-1.5">
+                        <span data-component-id="badge-success" data-component-type="badge" data-component-variant="success" role="status" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-success-green-soft text-success-green">
+                          <span class="material-symbols-outlined" style="font-size: 13px; font-variation-settings: &#39;FILL&#39; 1;" aria-hidden="true">check_circle</span>
+                          <span data-design-text-token="label-sm" class="font-label text-label-sm">Success</span>
+                        </span>
+                      </td>
+                      <td class="py-2.5 pl-1.5"><span data-design-text-token="mono-sm" class="font-mono text-mono-sm text-light-on-surface-variant tabular-nums">630616096903</span></td>
+                    </tr>
+
+                    <tr class="hover:bg-light-surface-container-low/50 transition-colors duration-state-change">
+                      <td class="py-2.5 pr-1.5"><span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface tabular-nums">Nov 2 2026, 4:26 PM</span></td>
+                      <td class="py-2.5 px-1.5"><span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface tabular-nums">7011741998</span></td>
+                      <td class="py-2.5 px-1.5"><span data-design-text-token="mono-sm" class="font-mono text-mono-sm text-light-on-surface-variant tabular-nums">20387713681</span></td>
+                      <td class="py-2.5 px-1.5"><span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface tabular-nums">₹5,00,000.00</span></td>
+                      <td class="py-2.5 px-1.5">
+                        <span data-component-id="badge-error" data-component-type="badge" data-component-variant="error" role="status" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-refund-red-soft text-refund-red">
+                          <span class="material-symbols-outlined" style="font-size: 13px;" aria-hidden="true">undo</span>
+                          <span data-design-text-token="label-sm" class="font-label text-label-sm">Refund</span>
+                        </span>
+                      </td>
+                      <td class="py-2.5 pl-1.5"><span data-design-text-token="mono-sm" class="font-mono text-mono-sm text-light-on-surface-variant">-</span></td>
+                    </tr>
+
+                    <tr class="hover:bg-light-surface-container-low/50 transition-colors duration-state-change">
+                      <td class="py-2.5 pr-1.5"><span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface tabular-nums">Nov 2 2026, 4:25 PM</span></td>
+                      <td class="py-2.5 px-1.5"><span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface tabular-nums">7011741998</span></td>
+                      <td class="py-2.5 px-1.5"><span data-design-text-token="mono-sm" class="font-mono text-mono-sm text-light-on-surface-variant tabular-nums">002912100024052</span></td>
+                      <td class="py-2.5 px-1.5"><span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface tabular-nums">₹5,00,000.00</span></td>
+                      <td class="py-2.5 px-1.5">
+                        <span data-component-id="badge-error" data-component-type="badge" data-component-variant="error" role="status" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-refund-red-soft text-refund-red">
+                          <span class="material-symbols-outlined" style="font-size: 13px;" aria-hidden="true">undo</span>
+                          <span data-design-text-token="label-sm" class="font-label text-label-sm">Refund</span>
+                        </span>
+                      </td>
+                      <td class="py-2.5 pl-1.5"><span data-design-text-token="mono-sm" class="font-mono text-mono-sm text-light-on-surface-variant">-</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Business Summary Card -->
+            <div class="lg:col-span-4 bg-light-surface-container-lowest rounded-lg p-gutter-md border border-light-outline-variant/40 ambient-card-shadow flex flex-col justify-between gap-gutter-md">
+              <!-- Header -->
+              <div class="flex items-center justify-between gap-gutter-xs">
+                <div class="flex items-center gap-gutter-xs">
+                  <span class="w-7 h-7 rounded-md bg-brand-mint-soft text-light-primary inline-flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined" style="font-size: 16px;" aria-hidden="true">bar_chart</span>
+                  </span>
+                  <h2 data-design-text-token="title-md" class="font-title text-title-md text-light-on-surface">Business Summary</h2>
+                </div>
+                <button type="button" class="inline-flex items-center gap-0.5 px-2.5 py-1 rounded-full bg-light-surface-container-low border border-light-outline-variant/50 text-light-on-surface hover:bg-light-surface-container transition-colors shrink-0">
+                  <span data-design-text-token="label-sm" class="font-label text-label-sm">This Month</span>
+                  <span class="material-symbols-outlined" style="font-size: 15px;" aria-hidden="true">keyboard_arrow_down</span>
+                </button>
+              </div>
+
+              <!-- Monthly Business Sparkline Sub-Card -->
+              <div class="relative overflow-hidden rounded-lg bg-light-surface-container-low/70 border border-light-outline-variant/30 p-gutter-md flex flex-col gap-gutter-sm">
+                <div class="flex items-start justify-between gap-gutter-xs relative z-10">
+                  <div class="flex flex-col gap-gutter-xs">
+                    <span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface-variant">Monthly Business</span>
+                    <span data-design-text-token="headline-md" class="font-headline text-headline-md text-light-on-surface tabular-nums">₹ 10,19,999.00</span>
+                    <div class="flex items-center gap-gutter-xs mt-0.5">
+                      <span class="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-success-green-soft text-success-green">
+                        <span class="material-symbols-outlined" style="font-size: 13px;" aria-hidden="true">arrow_upward</span>
+                        <span data-design-text-token="label-sm" class="font-label text-label-sm tabular-nums">+12.4%</span>
+                      </span>
+                      <span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">vs last month</span>
+                    </div>
+                  </div>
+
+                  <!-- Dark Value Tooltip Pill -->
+                  <span class="inline-flex items-center px-2 py-1 rounded-md bg-brand-green-deep text-light-on-primary shadow-sm shrink-0">
+                    <span data-design-text-token="label-sm" class="font-label text-label-sm tabular-nums">₹10,19,999</span>
+                  </span>
+                </div>
+
+                <!-- Smooth Rising Area Chart SVG -->
+                <svg class="w-full h-20 -mb-2" viewBox="0 0 320 80" fill="none" preserveAspectRatio="none" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="bizAreaGrad" x1="160" y1="10" x2="160" y2="80" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stop-color="#48C16E" stop-opacity="0.35"></stop>
+                      <stop offset="100%" stop-color="#48C16E" stop-opacity="0.0"></stop>
+                    </linearGradient>
+                  </defs>
+                  <path d="M0 74C42 74 64 56 96 58C128 60 150 38 182 44C214 50 242 26 276 28C294 29 306 16 314 12V80H0V74Z" fill="url(#bizAreaGrad)"></path>
+                  <path d="M0 74C42 74 64 56 96 58C128 60 150 38 182 44C214 50 242 26 276 28C294 29 306 16 314 12" stroke="#109B4D" stroke-width="2.5" stroke-linecap="round"></path>
+                  <circle cx="314" cy="12" r="5" fill="#48C16E" fill-opacity="0.35"></circle>
+                  <circle cx="314" cy="12" r="3" fill="#109B4D" stroke="#FFFFFF" stroke-width="1.5"></circle>
+                </svg>
+              </div>
+
+              <!-- Lower 3 Mini Summary Cards -->
+              <div class="grid grid-cols-3 gap-gutter-xs items-stretch">
+                <!-- Today Transactions -->
+                <div class="rounded-md bg-brand-mint-soft/70 border border-brand-green/15 p-gutter-sm flex flex-col justify-between gap-gutter-sm">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M4 9H19L15 5" stroke="#109B4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M20 15H5L9 19" stroke="#109B4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                  <div class="flex flex-col gap-0.5">
+                    <span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant leading-tight">Today Transactions</span>
+                    <span data-design-text-token="headline-sm" class="font-headline text-headline-sm text-light-on-surface tabular-nums">₹ 0.00</span>
+                  </div>
+                </div>
+
+                <!-- Today Borrowed Amount -->
+                <div class="rounded-md bg-refund-red-soft/70 border border-refund-red/15 p-gutter-sm flex flex-col justify-between gap-gutter-sm">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M12 4L4 8L12 12L20 8L12 4Z" fill="#B91C1C" fill-opacity="0.2" stroke="#B91C1C" stroke-width="1.8" stroke-linejoin="round"></path>
+                    <path d="M4 12L12 16L20 12" stroke="#B91C1C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M4 16L12 20L20 16" stroke="#B91C1C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                  <div class="flex flex-col gap-0.5">
+                    <span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant leading-tight">Today Borrowed</span>
+                    <span data-design-text-token="headline-sm" class="font-headline text-headline-sm text-light-on-surface tabular-nums">₹ 0.00</span>
+                  </div>
+                </div>
+
+                <!-- Total Reversal Transactions -->
+                <div class="rounded-md bg-info-blue-soft/90 border border-info-blue/15 p-gutter-sm flex flex-col justify-between gap-gutter-sm">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M21 12C21 7.03 16.97 3 12 3C8.8 3 6.02 4.67 4.44 7.2" stroke="#2563EB" stroke-width="2" stroke-linecap="round"></path>
+                    <path d="M4 3.5V7.5H8" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M3 12C3 16.97 7.03 21 12 21C15.2 21 17.98 19.33 19.56 16.8" stroke="#2563EB" stroke-width="2" stroke-linecap="round"></path>
+                    <path d="M20 20.5V16.5H16" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                  <div class="flex flex-col gap-0.5">
+                    <span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant leading-tight">Total Reversal</span>
+                    <span data-design-text-token="headline-sm" class="font-headline text-headline-sm text-light-on-surface tabular-nums">₹ 0.00</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+
+      <!-- Footer -->
+      <footer class="px-gutter-lg py-gutter-md border-t border-light-outline-variant/30 flex flex-col sm:flex-row items-center justify-between gap-gutter-sm max-w-7xl w-full mx-auto">
+        <p data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">
+          Copyright © 2024 Bhavi Lax Technologies &amp; Utility Solutions Private Limited. All rights reserved.
+        </p>
+        <div class="flex items-center gap-gutter-sm">
+          <span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">Powered by</span>
+          <span class="inline-flex items-center gap-1.5">
+            <span class="w-5 h-5 rounded-sm bg-brand-green inline-flex items-center justify-center">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M16.5 6.5H10.2C8.1 6.5 6.8 7.8 6.8 9.4C6.8 11.1 8.1 12 10.4 12.4L13.6 13C15.8 13.4 16.8 14.3 16.8 15.8C16.8 17.5 15.3 18.6 13 18.6H7.2" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round"></path>
+              </svg>
+            </span>
+            <span data-design-text-token="label-md" class="font-label text-label-md text-brand-green-deep">SmartEdge</span>
+          </span>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    function toggleBalance(id, btn) {
+      var el = document.getElementById(id);
+      var icon = btn.querySelector('.material-symbols-outlined');
+      if (!el || !icon) return;
+      var masked = el.dataset.masked === 'true';
+      if (masked) {
+        el.textContent = el.dataset.balance;
+        el.dataset.masked = 'false';
+        icon.textContent = 'visibility';
+      } else {
+        el.textContent = '₹ •••••';
+        el.dataset.masked = 'true';
+        icon.textContent = 'visibility_off';
+      }
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        var search = document.getElementById('global-search');
+        if (search) search.focus();
+      }
+    });
+  </script>
+
+
+</body></html>

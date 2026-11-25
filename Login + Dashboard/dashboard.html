@@ -176,43 +176,68 @@
         </div>
 
         <!-- NAVIGATION MENU LIST -->
-        <nav class="space-y-1.5 px-1 font-medium text-[14.5px]">
+        <nav class="space-y-1.5 px-1 font-medium text-[14.5px] overflow-y-auto">
           
           <!-- 1. Dashboard (Active) -->
-          <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-[#00875a] to-[#00a86b] text-white font-semibold shadow-nav-active transition-all">
+          <a href="dashboard.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-[#00875a] to-[#00a86b] text-white font-semibold shadow-nav-active transition-all">
             <i class="ph-duotone ph-squares-four text-xl"></i>
             <span class="tracking-wide">Dashboard</span>
           </a>
 
           <!-- 2. Fund Request -->
-          <a href="#fund-request" class="group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-[#00875a] transition-all">
-            <div class="flex items-center gap-3">
-              <i class="ph-duotone ph-wallet text-xl text-slate-600 group-hover:text-[#00875a] transition-colors"></i>
-              <span>Fund Request</span>
+          <div class="space-y-1">
+            <button type="button" data-dash-accordion="fund-request" aria-expanded="false" class="w-full group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-[#00875a] transition-all">
+              <div class="flex items-center gap-3">
+                <i class="ph-duotone ph-wallet text-xl text-slate-600 group-hover:text-[#00875a] transition-colors"></i>
+                <span>Fund Request</span>
+              </div>
+              <i class="ph-bold ph-caret-right text-xs text-slate-400 group-hover:text-[#00875a] transition-transform" data-dash-chevron="fund-request"></i>
+            </button>
+            <div class="hidden pl-9 pr-2 space-y-1 text-[13px]" data-dash-panel="fund-request">
+              <a href="fund-request.html" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-[#00875a] transition-colors">Add New Request</a>
+              <a href="fund-request-reports.html" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-[#00875a] transition-colors">Fund Request Reports</a>
+              <a href="pending-upi-collect.html" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-[#00875a] transition-colors">Pending UPI Collect</a>
             </div>
-            <i class="ph-bold ph-caret-right text-xs text-slate-400 group-hover:text-[#00875a] group-hover:translate-x-0.5 transition-all"></i>
-          </a>
+          </div>
 
           <!-- 3. Transactions -->
-          <a href="#transactions" class="group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-[#00875a] transition-all">
-            <div class="flex items-center gap-3">
-              <i class="ph-duotone ph-receipt text-xl text-slate-600 group-hover:text-[#00875a] transition-colors"></i>
-              <span>Transactions</span>
+          <div class="space-y-1">
+            <button type="button" data-dash-accordion="transactions" aria-expanded="false" class="w-full group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-[#00875a] transition-all">
+              <div class="flex items-center gap-3">
+                <i class="ph-duotone ph-receipt text-xl text-slate-600 group-hover:text-[#00875a] transition-colors"></i>
+                <span>Transactions</span>
+              </div>
+              <i class="ph-bold ph-caret-right text-xs text-slate-400 group-hover:text-[#00875a] transition-transform" data-dash-chevron="transactions"></i>
+            </button>
+            <div class="hidden pl-9 pr-2 space-y-1 text-[13px]" data-dash-panel="transactions">
+              <a href="recharge-transactions.html" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-[#00875a] transition-colors">Recharge</a>
+              <a href="bill-payment-transactions.html" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-[#00875a] transition-colors">Bill Payment</a>
+              <a href="aeps-transactions.html" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-[#00875a] transition-colors">AEPS</a>
+              <a href="upi-collect-transactions.html" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-[#00875a] transition-colors">UPI Collect</a>
+              <a href="refund-transactions.html" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-[#00875a] transition-colors">Refund List</a>
             </div>
-            <i class="ph-bold ph-caret-right text-xs text-slate-400 group-hover:text-[#00875a] group-hover:translate-x-0.5 transition-all"></i>
-          </a>
+          </div>
 
           <!-- 4. Reports -->
-          <a href="#reports" class="group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-[#00875a] transition-all">
-            <div class="flex items-center gap-3">
-              <i class="ph-duotone ph-chart-line-up text-xl text-slate-600 group-hover:text-[#00875a] transition-colors"></i>
-              <span>Reports</span>
+          <div class="space-y-1">
+            <button type="button" data-dash-accordion="reports" aria-expanded="false" class="w-full group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-[#00875a] transition-all">
+              <div class="flex items-center gap-3">
+                <i class="ph-duotone ph-chart-line-up text-xl text-slate-600 group-hover:text-[#00875a] transition-colors"></i>
+                <span>Reports</span>
+              </div>
+              <i class="ph-bold ph-caret-right text-xs text-slate-400 group-hover:text-[#00875a] transition-transform" data-dash-chevron="reports"></i>
+            </button>
+            <div class="hidden pl-9 pr-2 space-y-1 text-[13px]" data-dash-panel="reports">
+              <a href="ledger-report.html" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-[#00875a] transition-colors">Ledger</a>
+              <a href="aeps-ledger-report.html" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-[#00875a] transition-colors">AEPS Ledger</a>
+              <a href="commission-ledger.html" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-[#00875a] transition-colors">Commission Ledger</a>
+              <a href="commission-details.html" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-[#00875a] transition-colors">Commission Details</a>
+              <a href="debit-credit-balance.html" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-[#00875a] transition-colors">Debit/Credit Balance</a>
             </div>
-            <i class="ph-bold ph-caret-right text-xs text-slate-400 group-hover:text-[#00875a] group-hover:translate-x-0.5 transition-all"></i>
-          </a>
+          </div>
 
           <!-- 5. Settlement -->
-          <a href="#settlement" class="group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-[#00875a] transition-all">
+          <a href="add-bank.html" class="group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-[#00875a] transition-all">
             <div class="flex items-center gap-3">
               <i class="ph-duotone ph-bank text-xl text-slate-600 group-hover:text-[#00875a] transition-colors"></i>
               <span>Settlement</span>
@@ -221,16 +246,23 @@
           </a>
 
           <!-- 6. Setting -->
-          <a href="#settings" class="group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-[#00875a] transition-all">
-            <div class="flex items-center gap-3">
-              <i class="ph-duotone ph-gear text-xl text-slate-600 group-hover:text-[#00875a] transition-colors"></i>
-              <span>Setting</span>
+          <div class="space-y-1">
+            <button type="button" data-dash-accordion="setting" aria-expanded="false" class="w-full group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-[#00875a] transition-all">
+              <div class="flex items-center gap-3">
+                <i class="ph-duotone ph-gear text-xl text-slate-600 group-hover:text-[#00875a] transition-colors"></i>
+                <span>Setting</span>
+              </div>
+              <i class="ph-bold ph-caret-right text-xs text-slate-400 group-hover:text-[#00875a] transition-transform" data-dash-chevron="setting"></i>
+            </button>
+            <div class="hidden pl-9 pr-2 space-y-1 text-[13px]" data-dash-panel="setting">
+              <a href="add-bank.html" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-[#00875a] transition-colors">Add Bank</a>
+              <a href="change-password.html" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-[#00875a] transition-colors">Change Password</a>
+              <a href="change-mpin.html" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-emerald-50 hover:text-[#00875a] transition-colors">Change M-Pin</a>
             </div>
-            <i class="ph-bold ph-caret-right text-xs text-slate-400 group-hover:text-[#00875a] group-hover:translate-x-0.5 transition-all"></i>
-          </a>
+          </div>
 
           <!-- 7. AEPS Drivers -->
-          <a href="#aeps-drivers" class="group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-[#00875a] transition-all">
+          <a href="aeps-transactions.html" class="group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-[#00875a] transition-all">
             <div class="flex items-center gap-3">
               <i class="ph-duotone ph-fingerprint text-xl text-slate-600 group-hover:text-[#00875a] transition-colors"></i>
               <span>AEPS Drivers</span>
@@ -605,7 +637,7 @@
                 <h2 class="text-base sm:text-lg font-bold text-slate-900 tracking-tight">Last 10 Transactions</h2>
               </div>
               
-              <a href="#all-transactions" class="inline-flex items-center gap-1.5 text-xs sm:text-[13px] font-semibold text-[#00875a] hover:text-[#00754e] hover:underline group">
+              <a href="recharge-transactions.html" class="inline-flex items-center gap-1.5 text-xs sm:text-[13px] font-semibold text-[#00875a] hover:text-[#00754e] hover:underline group">
                 <span>View All Transactions</span>
                 <i class="ph-bold ph-arrow-right text-xs group-hover:translate-x-0.5 transition-transform"></i>
               </a>
@@ -889,6 +921,20 @@
     if (mobileSidebarToggle) mobileSidebarToggle.addEventListener('click', openMobileSidebar);
     if (closeSidebarBtn) closeSidebarBtn.addEventListener('click', closeMobileSidebar);
     if (sidebarBackdrop) sidebarBackdrop.addEventListener('click', closeMobileSidebar);
+
+    // Sidebar Accordion Toggle
+    document.querySelectorAll('[data-dash-accordion]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const key = btn.getAttribute('data-dash-accordion');
+        const panel = document.querySelector(`[data-dash-panel="${key}"]`);
+        const chevron = document.querySelector(`[data-dash-chevron="${key}"]`);
+        if (!panel) return;
+        const isHidden = panel.classList.contains('hidden');
+        panel.classList.toggle('hidden', !isHidden);
+        btn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+        if (chevron) chevron.classList.toggle('rotate-90', isHidden);
+      });
+    });
 
     // Toggle Balance Eye Icons
     const toggleButtons = document.querySelectorAll('.toggle-balance-btn');
