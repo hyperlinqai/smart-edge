@@ -145,7 +145,7 @@
       <div class="p-gutter-md flex flex-col gap-gutter-lg relative z-10 overflow-y-auto">
         <div class="flex items-center justify-between px-1">
           <a href="dashboard.html" class="flex items-center group">
-            <img src="assets/images/smartedge-logo.png" alt="SmartEdge - Fast • Secure • Smart Payments" class="h-[52px] w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]" />
+            <img src="assets/images/smartedge-logo.png" alt="SmartEdge - Fast • Secure • Smart Payments" class="h-[68px] w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]" />
           </a>
           <button type="button" id="close-sidebar-btn" class="lg:hidden p-1.5 rounded-md text-light-on-surface-variant hover:bg-light-surface-container-low" aria-label="Close Menu">
             <span class="material-symbols-outlined" style="font-size: 20px;">close</span>
